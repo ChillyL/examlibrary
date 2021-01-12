@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+    <title>学生思考题作答详情</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+    <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+
+</head>
+<body>
+
+<nav class="ui top attached demo menu" style="height: 50px">
+    <a class="left item" onclick="window.history.go(-1)">
+        <i class="angle double left icon"></i>返回
+    </a>
+</nav>
+
+<!--中间内容-->
+<div class="m-padded-tb-big m-container-small">
+    <div class="ui container">
+
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">恭喜，操作成功！</p>
+        </div>
+
+        <div class="ui segment basic" id="table-container">
+
+            <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+                学生信息
+            </h4>
+
+            <table class="ui celled table">
+                <thead>
+                <tr align="center">
+                    <th>序号</th>
+                    <th>学号</th>
+                    <th>班级</th>
+                    <th>姓名</th>
+                    <th th:unless="${studentScore.answerList}">作答状态</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr align="center" th:each="answerStudent,iterStat : ${studentScore}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${answerStudent.student_number}">3117001111</td>
+                    <td th:text="${answerStudent.student_class}">170805</td>
+                    <td th:text="${answerStudent.student_name}">小李</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+                成绩详情
+            </h4>
+
+            <table class="ui celled table">
+                <thead>
+                <tr align="center">
+                    <th>序号</th>
+                    <th>分类</th>
+                    <th>书名</th>
+                    <th>思考题得分</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr align="center" th:each="answerStudent,iterStat : ${studentScore.answerList}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${answerStudent.classify_name}">历史人文</td>
+                    <td th:text="${answerStudent.book_title}">时间简史</td>
+                    <td th:text="${answerStudent.answer_score} == 0 ? '未批改' : ${answerStudent.answer_score}">小李</td>
+                </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!--CDN版本,不需要下载-->
+<!--连接jsdeliver-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--链接semantic UI-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<!--对头菜单移动端的应用-->
+<script>
+    // 关闭消息提示
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        })
+    ;
+
+
+</script>
+</body>
+</html>

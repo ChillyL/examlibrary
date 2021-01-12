@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.AdminTeacherMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="teacherResult" type="com.chilly.examlibrary.entity.Teacher">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="teacher_id" property="teacher_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="teacher_name" property="teacher_name" javaType="String" jdbcType="VARCHAR"/>
+        <result column="teacher_number" property="teacher_number" javaType="String" jdbcType="VARCHAR"/>
+        <result column="teacher_password" property="teacher_password" javaType="String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">-->
+    <select id="listTeacher" resultMap="teacherResult">
+        select *
+        from teacher
+    </select>
+
+    <insert id="addTeacher"  parameterType="com.chilly.examlibrary.entity.Teacher">
+        -- 新增后赋值给teacher_id
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="teacher_id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into teacher
+        (teacher_name,teacher_number,teacher_password)
+        values
+        (#{teacher_name},#{teacher_number},#{teacher_password})
+    </insert>
+
+    <select id="getTeacherByNumber" resultMap="teacherResult" parameterType="string">
+        select teacher_id,teacher_name,teacher_number,teacher_password
+        from teacher
+        where teacher_number =#{teacher_number}
+    </select>
+
+    <select id="getTeacherById" resultMap="teacherResult" parameterType="long">
+        select teacher_id,teacher_name,teacher_number,teacher_password
+        from teacher
+        where teacher_id =#{teacher_id}
+    </select>
+
+    <!--模糊查询-->
+    <select id="listTeacherByName" resultMap="teacherResult" parameterType="string">
+        -- bind 元素可以从 OGNL 表达式中创建一个变量并将其绑定到上下文
+        <bind name="pattern" value="'%' + teacher_name + '%'"/>
+        select teacher_id,teacher_name,teacher_number,teacher_password
+        from teacher
+        <where>
+            <if test="teacher_name != null">
+                teacher_name like #{pattern}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteTeacherById" parameterType="long">
+        delete from teacher
+        where teacher_id =#{teacher_id}
+    </delete>
+
+    <update id="updateTeacher" parameterType="com.chilly.examlibrary.entity.Teacher">
+        update teacher set teacher_name =#{teacher_name},teacher_number =#{teacher_number},
+        teacher_password =#{teacher_password}
+        where teacher_id =#{teacher_id}
+    </update>
+</mapper>

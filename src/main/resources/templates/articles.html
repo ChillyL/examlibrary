@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>书籍详情</title>
+
+  <link rel="stylesheet" type="text/css" href="../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+
+  <script src="../static/assets/library/jquery.min.js" th:src="@{/assets/library/jquery.min.js}"></script>
+  <script src="../static/dist/components/transition.js" th:src="@{/dist/components/transition.js}"></script>
+  <script src="../static/dist/components/dropdown.js" th:src="@{/dist/components/dropdown.js}"></script>
+  <script src="../static/dist/components/visibility.js" th:src="@{/dist/components/visibility.js}"></script>
+
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix main menu to page on passing
+      $('.main.menu').visibility({
+        type: 'fixed'
+      });
+      $('.overlay').visibility({
+        // type: 'fixed',
+        offset: 80
+      });
+
+      // lazy load images
+      $('.image').visibility({
+        type: 'image',
+        transition: 'vertical flip in',
+        duration: 500
+      });
+
+      // show dropdown on hover
+      $('.main.menu  .ui.dropdown').dropdown({
+        on: 'hover'
+      });
+    })
+  ;
+  </script>
+
+  <style type="text/css" th:inline="text">
+
+  body {
+    background-color: #FFFFFF;
+  }
+  .main.container {
+    margin-top: 2em;
+  }
+
+  .main.menu {
+    margin-top: 4em;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    transition:
+      box-shadow 0.5s ease,
+      padding 0.5s ease
+    ;
+  }
+  .main.menu .item img.logo {
+    margin-right: 1.5em;
+  }
+
+  .text.container .left.floated.image {
+    margin: 2em 2em 2em -4em;
+  }
+  .text.container .right.floated.image {
+    margin: 2em -4em 2em 2em;
+  }
+
+  .ui.footer.segment {
+    margin: 5em 0em 0em;
+    padding: 5em 0em;
+  }
+  </style>
+
+</head>
+<body>
+
+  <div class="ui borderless main menu" style="background-image:url('https://picsum.photos/id/379/2000/500');">
+    <div class="ui text container">
+      <div class="header item">
+        <a href="" th:href="@{/}"><h3 style="color: #b98286;font-family: STSong;">通识阅读</h3></a>
+      </div>
+      <div class="item"><h4 th:text="${book.classify.classify_name}">历史人文</h4></div>
+    </div>
+  </div>
+
+  <div class="ui text container">
+
+    <div class="column">
+      <table class="ui definition celled right aligned table">
+
+        <tbody>
+        <tr>
+          <td class="left aligned">书名</td>
+          <td><h3 style="color: #b98286;font-family: STSong;">《<span th:text="${book.book_title}">明朝那些事儿</span>》</h3></td>
+        </tr>
+        <tr>
+          <td class="left aligned">作者</td>
+          <td th:text="${book.book_author}">当年明月</td>
+        </tr>
+        <tr>
+          <td class="left aligned">出版社</td>
+          <td th:text="${book.book_publisher}">北京联合出版公司</td>
+        </tr>
+        <tr>
+          <td class="left aligned">出版年月</td>
+          <td th:text="${book.book_createTime}">2017</td>
+        </tr>
+        <tr>
+          <td class="left aligned">推荐人</td>
+          <td th:text="${book.teacher.teacher_name}">周文</td>
+        </tr>
+        <tr>
+          <td class="left aligned">相关资料下载</td>
+          <form class="form-signin" th:action="@{/book/download?(book_data=${book.book_data})}" method="post">
+            <td><button class="ui basic submit button">下载</button></td>
+            <p style="color: red" th:text="${result}" th:if="${not #strings.isEmpty(result)}"></p>
+          </form>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+       阅读指引
+    </h4>
+
+    <p th:text="${book.book_intro}">《明朝那些事儿》这篇文主要讲述的是从1344年到1644年这三百年间关于明朝的一些事情，以史料为基础，以年代和具体人物为主线，并加入了小说的笔法，对明朝十七帝和其他王公权贵和小人物的命运进行全景展示，尤其对官场政治、战争、帝王心术着墨最多，并加入对当时政治经济制度、人伦道德的演义。</p>
+
+    <h3 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+      <a href="#" target="_blank" th:href="${session.teacher}? @{/book/problem/input/{bookId}(bookId=${book.book_id})}:@{/book/answer/input/{studentId}/{bookId}(studentId=${session.student.student_id},bookId=${book.book_id})}">点击进入相关思考题</a>
+    </h3>
+
+    <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+      互动交流
+    </h4>
+
+    <!--留言区域-->
+
+      <div id="comment-container" class="ui segment">
+        <div th:fragment="commentList">
+          <div class="ui threaded comments" style="max-width: 100%;">
+
+            <h3 class="ui dividing header">评论</h3>
+            <div class="comment" th:each="comment : ${comments}">
+              <a class="avatar">
+                <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1010/100/100}">
+              </a>
+              <div class="content">
+                <a class="author">
+                  <span th:text="${comment.comment_user_name}">Matt</span>
+                  <div class="ui mini basic left pointing label m-padded-mini" style="color: #b98286;"
+                       th:if="${comment.comment_teacher}">老师
+                  </div>
+                </a>
+                <div class="metadata">
+                                    <span class="date"
+                                          th:text="${#dates.format(comment.comment_createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                </div>
+                <div class="text" th:text="${comment.comment_content}">
+                  How artistic!
+                </div>
+                <div class="actions">
+                  <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                     th:attr="data-commentid=${comment.comment_id},data-commentnickname=${comment.comment_user_name}"
+                     onclick="reply(this)">回复</a>
+                  <a class="delete" href="#"
+                     th:href="@{/comment/{param1}/{param2}/delete(param1=${comment.comment_book_id},param2=${comment.comment_id})}"
+                     onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.teacher}">删除</a>
+                </div>
+              </div>
+              <!--                                子集评论-->
+              <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                <div class="comment" th:each="reply : ${comment.replyComments}">
+                  <a class="avatar">
+                    <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1010/100/100}">
+                  </a>
+                  <div class="content">
+                    <a class="author">
+                      <span th:text="${reply.comment_user_name}">小红</span>
+                      <div class="ui mini basic left pointing label m-padded-mini" style="color: #b98286;"
+                           th:if="${reply.comment_teacher}">老师
+                      </div>
+                      &nbsp;<span th:text="|@ ${reply.parentName}|" class="m-teal">@ 小白</span>
+                    </a>
+                    <div class="metadata">
+                                            <span class="date"
+                                                  th:text="${#dates.format(reply.comment_createTime,'yyyy-MM-dd HH:mm')}">Just now</span>
+                    </div>
+                    <div class="text" th:text="${reply.comment_content}">
+                      Elliot you are always so right :)
+                    </div>
+                    <div class="actions">
+                      <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                         th:attr="data-commentid=${reply.comment_id},data-commentnickname=${reply.comment_user_name}"
+                         onclick="reply(this)">回复</a>
+                      <a class="delete" href="#"
+                         th:href="@{/comment/{param1}/{param2}/delete(param1=${reply.comment_book_id},param2=${reply.comment_id})}"
+                         onclick="alert('确定要删除该评论吗？三思啊! 删了可就没了！')"
+                         th:if="${session.user}">删除</a>
+                      <!--<a class="delete" href="#" th:href="@{/comment/{id}/delete(id=${reply.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>-->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div id="comment-form" class="ui form">
+        <input type="hidden" name="bookId" th:value="${book.book_id}">
+        <input type="hidden" name="parentComment.comment_id" value="-1">
+        <input type="hidden" name="name" th:value="${session.teacher}? ${session.teacher.teacher_name}: ${session.student.student_name}">
+        <input type="hidden" name="number" th:value="${session.teacher}? ${session.teacher.teacher_number}: ${session.student.student_number}">
+        <div class="field">
+          <textarea name="content" placeholder="请输入评论信息(250字以内)....." maxlength="250"></textarea>
+        </div>
+          <div class="field m-mobile-wide m-margin-bottom-small">
+            <button id="commentpost-btn" type="button" class="ui button m-mobile-wide m-text-thin"><i
+                    class="edit icon"></i>发布
+            </button>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+  <div class="ui vertical footer segment" style="background-image:url('https://picsum.photos/id/379/2000/2000');">
+    <div class="ui container">
+      <div class="ui stackable divided equal height stackable grid">
+        <div class="wide column">
+          <h4 class="ui header">阅读库</h4>
+          <p>五邑大学文学院。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--CDN版本,不需要下载-->
+  <!--连接jsdeliver-->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <!--链接semantic UI-->
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+  <script th:inline="javascript">
+    //评论表单验证
+    $('.ui.form').form({
+      fields: {
+        content: {
+          identifier: 'content',
+          rules: [{
+            type: 'empty',
+            prompt: '请输入评论内容'
+          }
+          ]
+        }
+      }
+    });
+
+    $(function () {
+      $("#comment-container").load(/*[[@{/comments/{bookId}(bookId=${book.book_id})}]]*/"comments/6");
+    });
+
+    $('#commentpost-btn').click(function () {
+      var boo = $('.ui.form').form('validate form');
+      if (boo) {
+        console.log("评论表单校验成功");
+        postData();
+      } else {
+        console.log("评论表单校验失败");
+      }
+    })
+
+    function postData() {
+      $("#comment-container").load(/*[[@{/comments}]]*/"", {
+        "parentComment.comment_id": $("[name='parentComment.comment_id']").val(),
+        "comment_book_id": $("[name='bookId']").val(),
+        "comment_user_name": $("[name='name']").val(),
+        "comment_user_number": $("[name='number']").val(),
+        "comment_content": $("[name='content']").val()
+      }, function (responseTxt, statusTxt, xhr) {  //回调方法
+        $(window).scrollTo($('#goto'), 500);   //滚动
+        clearContent();
+      });
+    }
+
+    //提交之后调用来清除内容
+    function clearContent() {
+      $("[name='content']").val('');
+      $("[name='parentComment.comment_id']").val(-1);
+      $("[name='content']").attr("placeholder", "请输入评论信息(250字以内)....." ,"maxlength","250");
+    }
+
+    //注意，此处的commentid，对应的是data-commentid，并且属性名不能出现大写
+    function reply(obj) {
+      var commentId = $(obj).data('commentid');
+      var commentNickname = $(obj).data('commentnickname');
+      $("[name='content']").attr("placeholder", "@" + commentNickname).focus();
+      $("[name='parentComment.comment_id']").val(commentId);  //赋值
+      $(window).scrollTo($('#comment-form'), 500);   //滚动
+    }
+  </script>
+
+</body>
+
+</html>

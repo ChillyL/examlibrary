@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.ProblemMapper"><!--java的mapper路径-->
+
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="problemResult" type="com.chilly.examlibrary.entity.Problem">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="problem_id" property="problem_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="problem_content" property="problem_content" javaType="String" jdbcType="VARCHAR"/>
+        <result column="problem_createTime" property="problem_createTime" javaType="Date" jdbcType="TIMESTAMP"></result>
+        <result column="problem_book_id" property="problem_book_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="problem_teacher_id" property="problem_teacher_id" javaType="Long" jdbcType="BIGINT"/>
+
+    </resultMap>
+
+    <insert id="saveProblem" parameterType="com.chilly.examlibrary.entity.Problem">
+        insert into problem
+        (problem_content,problem_createTime,problem_book_id,problem_teacher_id)
+        values
+        (#{problem_content},#{problem_createTime},#{problem_book_id},#{problem_teacher_id})
+    </insert>
+
+    <update id="updateProblem" parameterType="com.chilly.examlibrary.entity.Problem">
+        update problem set problem_content=#{problem_content},problem_createTime=#{problem_createTime},
+        problem_book_id=#{problem_book_id},problem_teacher_id=#{problem_teacher_id}
+        where problem_id=#{problem_id}
+    </update>
+
+    <select id="getProblemByBookId" parameterType="long" resultMap="problemResult">
+        select *
+        from problem
+        where problem_book_id =#{bookId}
+    </select>
+
+    <select id="getProblemById" parameterType="long" resultMap="problemResult">
+        select *
+        from problem
+        where problem_id =#{problemId}
+    </select>
+
+    <select id="listAnswerStudentIdByProblem" parameterType="long" resultMap="com.chilly.examlibrary.mapper.AnswerMapper.answerResult">
+        select a.answer_id,a.answer_content,a.problem_id,a.answer_book_id,a.answer_student_id,a.answer_score,
+        s.student_id,s.student_name,s.student_number,s.student_password,s.student_class
+        from answer a,student s
+        where a.answer_student_id = s.student_id
+        and problem_id=#{problem_id}
+    </select>
+
+</mapper>

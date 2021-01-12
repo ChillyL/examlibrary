@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.AdminBookMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="bookResult" type="com.chilly.examlibrary.entity.Book">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="book_id" property="book_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="book_title" property="book_title" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_intro" property="book_intro" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_author" property="book_author" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_data" property="book_data" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_createTime" property="book_createTime" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_publisher" property="book_publisher" javaType="String" jdbcType="VARCHAR"/>
+
+        <result column="book_teacher_id" property="book_teacher_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="book_classify_id" property="book_classify_id" javaType="Long" jdbcType="BIGINT"/>
+
+        <association property="teacher" javaType="com.chilly.examlibrary.entity.Teacher">
+            <id column="teacher_id" property="teacher_id"/>
+            <result column="teacher_name" property="teacher_name"/>
+        </association>
+        <association property="classify" javaType="com.chilly.examlibrary.entity.Classify">
+            <id column="classify_id" property="classify_id"/>
+            <result column="classify_name" property="classify_name"/>
+        </association>
+
+    </resultMap>
+
+    <select id="listBook" resultMap="bookResult">
+        select b.book_id,b.book_title,b.book_intro,b.book_author,b.book_data,b.book_createTime,
+        b.book_teacher_id,b.book_classify_id,b.book_publisher,
+        t.teacher_id,t.teacher_name,c.classify_name,c.classify_id
+        from book b,teacher t,classify c
+        where b.book_teacher_id = t.teacher_id and b.book_classify_id = c.classify_id
+    </select>
+
+    <select id="getBook" resultMap="bookResult" parameterType="long">
+        select b.book_id,b.book_title,b.book_intro,b.book_author,b.book_data,b.book_createTime,
+        b.book_teacher_id,b.book_classify_id,b.book_publisher,
+        t.teacher_id,t.teacher_name,c.classify_name,c.classify_id
+        from book b,teacher t,classify c
+        where b.book_teacher_id = t.teacher_id and b.book_classify_id = c.classify_id
+        and b.book_id =#{book_id}
+    </select>
+
+    <select id="listBookByTitleOrClassify" resultMap="bookResult" parameterType="com.chilly.examlibrary.entity.Book">
+        <bind name="pattern" value="'%' + book_title + '%'"/>
+        select b.book_id,b.book_title,b.book_intro,b.book_author,b.book_data,b.book_createTime,
+        b.book_teacher_id,b.book_classify_id,b.book_publisher,
+        t.teacher_id,t.teacher_name,c.classify_name,c.classify_id
+        from book b,teacher t,classify c
+        <where>
+            <if test="1 == 1">
+                b.book_teacher_id = t.teacher_id and b.book_classify_id = c.classify_id
+            </if>
+            <if test="book_classify_id != 0 and book_classify_id != null">
+                and book_classify_id =#{book_classify_id}
+            </if>
+            <if test="book_title != null and book_title != ''">
+                and book_title like #{pattern}
+            </if>
+        </where>
+    </select>
+
+    <select id="getBookByTitle" resultMap="bookResult" parameterType="String">
+        select *
+        from book
+        where book_title =#{book_title}
+    </select>
+
+    <insert id="saveBook" parameterType="com.chilly.examlibrary.entity.Book">
+        insert into book
+        (book_title,book_intro,book_author,book_data,book_createTime,book_teacher_id,book_classify_id,book_publisher)
+        values (#{book_title},#{book_intro},#{book_author},#{book_data},#{book_createTime},#{book_teacher_id},#{book_classify_id},#{book_publisher})
+    </insert>
+
+    <update id="updateBook" parameterType="com.chilly.examlibrary.entity.Book">
+        update book set book_title =#{book_title},book_intro =#{book_intro},book_author =#{book_author},book_data =#{book_data},
+        book_createTime =#{book_createTime},book_teacher_id =#{book_teacher_id},book_classify_id =#{book_classify_id},book_publisher =#{book_publisher}
+        where book_id =#{book_id}
+    </update>
+
+    <delete id="deleteBook" parameterType="long">
+        delete from book
+        where book_id =#{book_id}
+    </delete>
+</mapper>

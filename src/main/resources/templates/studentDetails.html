@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+
+    <title>学生详情</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+
+    <!--打分-->
+    <link rel="stylesheet" href="../static/css/normalize.min.css" th:href="@{/css/normalize.min.css}">
+<!--    <link rel="stylesheet" href="../../static/css/main.css">-->
+    <link rel="stylesheet" href="../static/css/examples.css" th:href="@{/css/examples.css}">
+
+</head>
+<body>
+
+<nav class="ui top attached demo menu" style="height: 50px">
+    <a class="left item" onclick="window.history.go(-1)">
+        <i class="angle double left icon"></i>返回
+    </a>
+</nav>
+
+
+<!--中间内容-->
+<div class="m-padded-tb-big m-container-small">
+    <div class="ui container">
+        <form action="#" id="score-form" th:object="${answer_student}" th:action="@{/book/setScore}"
+              method="post" class="ui form">
+
+            <input type="hidden" name="answer_score" th:value="*{answer_score}">
+            <input type="hidden" name="answer_id"  th:value="*{answer_id}">
+            <input type="hidden" name="problem_id"  th:value="*{problem_id}">
+            <input type="hidden" name="answer_book_id"  th:value="*{answer_book_id}">
+            <input type="hidden" name="answer_student_id"  th:value="*{answer_student_id}">
+            <input type="hidden" name="answer_content"  th:value="*{answer_content}">
+
+        <!--学生详情-->
+        <div class="ui top attached segment" data-wow-duration="2s"
+             style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <h3 class="ui header" style="font-family: STSong" th:text="${answer_student.student.student_name}">
+                        小李
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!--放置班级-->
+        <div class="ui attached teal segment m-padded-tb-large" data-wow-duration="2s"
+             style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+            <div class="ui middle aligned three column grid">
+
+                <div class="column" data-wow-duration="2s"
+                     style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+                    <h4 class="ui header">
+                        学号：<span th:text="${answer_student.student.student_number}">123</span>
+                    </h4>
+                </div>
+
+                <div class="column" data-wow-duration="2s"
+                     style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+                    <h4 class="ui header">
+                        班级：<span th:text="${answer_student.student.student_class}">170805</span>
+                    </h4>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!--考试记录-->
+        <div class="ui top attached segment" data-wow-duration="2s"
+             style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+            <div class="ui middle aligned two column grid">
+                <div class="column">
+                    <h3 class="ui header" style="font-family: STSong">
+                        考试记录
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!--放置试卷-->
+        <div class="ui attached segment teal m-padded-tb-large" data-wow-duration="2s"
+             style="visibility: visible; animation-duration: 2s; animation-name: fadeInUp;">
+
+            <h4 class="ui horizontal header divider" style="margin: 0em 0em 3em">
+                题目内容
+            </h4>
+
+            <!--题目内容-->
+            <div class="ui middle aligned mobile reversed stackable grid m-padded-tiny">
+
+                <!--题目-->
+                <div class="row" style="margin: 0em 0em 3em 3em">
+
+                        <p class="m-text-thin" th:utext="${problem_content}">
+                            《中国古代文学史》下1<br>
+                            阅读书目：<br>
+                            顾学颉选注《元人杂剧选》，人民文学出版社，2007年。<br>
+                            思考题：<br>
+                            （1）请结合文本，比较《梧桐雨》与《汉宫秋》的异同。<br>
+                            （2）请结合《窦娥冤》与《救风尘》，谈谈关汉卿杂剧中女性形象塑造的特色。<br>
+                        </p>
+
+
+                </div>
+
+                <h4 class="ui horizontal header divider" style="margin: 0em 0em 3em">
+                    学生答案
+                </h4>
+
+                <!--作答-->
+                <div class="row" style="margin: 0em 0em 3em 3em">
+
+                    <div class="wide column">
+                        <p class="m-text-thin" th:utext="${answer_student.answer_content}">
+                            《中国古代文学史》下1<br>
+                            阅读书目：<br>
+                            顾学颉选注《元人杂剧选》，人民文学出版社，2007年。<br>
+                            思考题：<br>
+                            （1）请结合文本，比较《梧桐雨》与《汉宫秋》的异同。<br>
+                            （2）请结合《窦娥冤》与《救风尘》，谈谈关汉卿杂剧中女性形象塑造的特色。<br>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <h4 class="ui horizontal header divider" style="margin: 0em 0em 3em" th:unless="${answer_student.answer_score} == 0">
+                    得分：<span th:text="${answer_student.answer_score}">6</span>
+                </h4>
+
+
+                <div class="row">
+
+                    <div class="box box-teal">
+                        <div class="box-header">修改评分</div>
+                        <div class="box-body">
+
+                            <select id="example-a" name="rating">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6" selected="selected">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                 </div>
+
+
+            </div>
+
+        </div>
+
+        <!--底部-->
+        <div class="ui bottom teal attached segment">
+            <div class="ui middle aligned one column grid">
+                <div class="center aligned column">
+                    <button id="btn" th:unless="${answer_student.answer_score} != 0"  class="ui teal button">提交</button>
+
+                    <button onclick="window.history.go(-1)" th:unless="${answer_student.answer_score} == 0" class="ui button">返回</button>
+                    <button id="btn2" th:unless="${answer_student.answer_score} == 0" class="ui orange button">修改</button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+        <!--CDN版本,不需要下载-->
+        <!--连接jsdeliver-->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+        <!--链接semantic UI-->
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<!--        打分-->
+        <script src="../static/js/vendor/jquery-1.11.2.min.js" th:src="@{/js/vendor/jquery-1.11.2.min.js}"></script>
+        <script src="../static/js/jquery.barrating.js" th:src="@{/js/jquery.barrating.js}"></script>
+        <script src="../static/js/examples.js" th:src="@{/js/examples.js}"></script>
+
+
+
+        <script th:inline="javascript">
+
+            $('#btn').click(function () {
+                var score = $("#example-a").find("option:selected").val();
+                $('[name="answer_score"]').val(score);
+
+                $('#score-form').submit();
+            });
+
+            $('#btn2').click(function () {
+                var score = $("#example-a").find("option:selected").val();
+                $('[name="answer_score"]').val(score);
+
+                $('#score-form').submit();
+            });
+
+
+
+        </script>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+2020-12-20 11:13:01.284  INFO 19452 --- [main] c.c.examlibrary.ExamlibraryApplication   : Starting ExamlibraryApplication using Java 12.0.1 on DESKTOP-4AJAGUQ with PID 19452 (E:\MyWebDome\ExamLibrary\examlibrary\target\classes started by 13267 in E:\MyWebDome\ExamLibrary\examlibrary)
+2020-12-20 11:13:01.425 DEBUG 19452 --- [main] c.c.examlibrary.ExamlibraryApplication   : Running with Spring Boot v2.4.1, Spring v5.3.2
+2020-12-20 11:13:01.427  INFO 19452 --- [main] c.c.examlibrary.ExamlibraryApplication   : The following profiles are active: dev
+2020-12-20 11:13:03.529  INFO 19452 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9090 (http)
+2020-12-20 11:13:03.540  INFO 19452 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-12-20 11:13:03.542  INFO 19452 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2020-12-20 11:13:03.545  INFO 19452 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.21] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2020-12-20 11:13:03.545  INFO 19452 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.21] using APR version [1.6.5].
+2020-12-20 11:13:03.546  INFO 19452 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2020-12-20 11:13:03.547  INFO 19452 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2020-12-20 11:13:03.608  INFO 19452 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2020-12-20 11:13:03.761  INFO 19452 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-12-20 11:13:03.762  INFO 19452 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2233 ms
+2020-12-20 11:13:04.897  INFO 19452 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-20 11:13:05.039  INFO 19452 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-12-20 11:13:05.687  INFO 19452 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9090 (http) with context path ''
+2020-12-20 11:13:05.703  INFO 19452 --- [main] c.c.examlibrary.ExamlibraryApplication   : Started ExamlibraryApplication in 5.453 seconds (JVM running for 8.995)
+2020-12-20 11:13:13.083  INFO 19452 --- [http-nio-9090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-20 11:13:13.084  INFO 19452 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-12-20 11:13:13.086  INFO 19452 --- [http-nio-9090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2020-12-20 11:13:16.455  WARN 19452 --- [http-nio-9090-exec-5] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [1,134] milliseconds.
+2020-12-20 11:13:16.485  INFO 19452 --- [http-nio-9090-exec-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-12-20 11:13:16.891  INFO 19452 --- [http-nio-9090-exec-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-12-20 11:13:16.900 DEBUG 19452 --- [http-nio-9090-exec-5] c.c.e.m.AdminLoginMapper.adminLogin      : ==>  Preparing: select * from admin where admin_number =? and admin_password =?
+2020-12-20 11:13:16.931 DEBUG 19452 --- [http-nio-9090-exec-5] c.c.e.m.AdminLoginMapper.adminLogin      : ==> Parameters: admin(String), 60cfa0bcffb7eba498d20e32ff80021e(String)
+2020-12-20 11:13:16.959 DEBUG 19452 --- [http-nio-9090-exec-5] c.c.e.m.AdminLoginMapper.adminLogin      : <==      Total: 1
+2020-12-20 11:13:33.693 DEBUG 19452 --- [http-nio-9090-exec-9] c.c.e.m.A.listTeacher_COUNT              : ==>  Preparing: SELECT count(0) FROM teacher
+2020-12-20 11:13:33.695 DEBUG 19452 --- [http-nio-9090-exec-9] c.c.e.m.A.listTeacher_COUNT              : ==> Parameters: 
+2020-12-20 11:13:33.723 DEBUG 19452 --- [http-nio-9090-exec-9] c.c.e.m.A.listTeacher_COUNT              : <==      Total: 1
+2020-12-20 11:13:33.726 DEBUG 19452 --- [http-nio-9090-exec-9] c.c.e.m.AdminTeacherMapper.listTeacher   : ==>  Preparing: select * from teacher LIMIT ?
+2020-12-20 11:13:33.727 DEBUG 19452 --- [http-nio-9090-exec-9] c.c.e.m.AdminTeacherMapper.listTeacher   : ==> Parameters: 10(Integer)
+2020-12-20 11:13:33.731 DEBUG 19452 --- [http-nio-9090-exec-9] c.c.e.m.AdminTeacherMapper.listTeacher   : <==      Total: 1
+2020-12-20 11:13:53.018 DEBUG 19452 --- [http-nio-9090-exec-10] c.c.e.m.A.listStudent_COUNT              : ==>  Preparing: SELECT count(0) FROM student
+2020-12-20 11:13:53.019 DEBUG 19452 --- [http-nio-9090-exec-10] c.c.e.m.A.listStudent_COUNT              : ==> Parameters: 
+2020-12-20 11:13:53.024 DEBUG 19452 --- [http-nio-9090-exec-10] c.c.e.m.A.listStudent_COUNT              : <==      Total: 1
+2020-12-20 11:13:53.025 DEBUG 19452 --- [http-nio-9090-exec-10] c.c.e.m.AdminStudentMapper.listStudent   : ==>  Preparing: select student_id,student_name,student_number,student_password,student_class from student LIMIT ?
+2020-12-20 11:13:53.025 DEBUG 19452 --- [http-nio-9090-exec-10] c.c.e.m.AdminStudentMapper.listStudent   : ==> Parameters: 10(Integer)
+2020-12-20 11:13:53.032 DEBUG 19452 --- [http-nio-9090-exec-10] c.c.e.m.AdminStudentMapper.listStudent   : <==      Total: 3
+2020-12-20 11:14:14.483 DEBUG 19452 --- [http-nio-9090-exec-1] c.c.e.m.A.listTeacher_COUNT              : ==>  Preparing: SELECT count(0) FROM teacher
+2020-12-20 11:14:14.484 DEBUG 19452 --- [http-nio-9090-exec-1] c.c.e.m.A.listTeacher_COUNT              : ==> Parameters: 
+2020-12-20 11:14:14.566 DEBUG 19452 --- [http-nio-9090-exec-1] c.c.e.m.A.listTeacher_COUNT              : <==      Total: 1
+2020-12-20 11:14:14.566 DEBUG 19452 --- [http-nio-9090-exec-1] c.c.e.m.AdminTeacherMapper.listTeacher   : ==>  Preparing: select * from teacher LIMIT ?
+2020-12-20 11:14:14.567 DEBUG 19452 --- [http-nio-9090-exec-1] c.c.e.m.AdminTeacherMapper.listTeacher   : ==> Parameters: 10(Integer)
+2020-12-20 11:14:14.570 DEBUG 19452 --- [http-nio-9090-exec-1] c.c.e.m.AdminTeacherMapper.listTeacher   : <==      Total: 1
+2020-12-20 11:14:16.875 DEBUG 19452 --- [http-nio-9090-exec-2] c.c.e.m.A.listStudent_COUNT              : ==>  Preparing: SELECT count(0) FROM student
+2020-12-20 11:14:16.876 DEBUG 19452 --- [http-nio-9090-exec-2] c.c.e.m.A.listStudent_COUNT              : ==> Parameters: 
+2020-12-20 11:14:16.880 DEBUG 19452 --- [http-nio-9090-exec-2] c.c.e.m.A.listStudent_COUNT              : <==      Total: 1
+2020-12-20 11:14:16.881 DEBUG 19452 --- [http-nio-9090-exec-2] c.c.e.m.AdminStudentMapper.listStudent   : ==>  Preparing: select student_id,student_name,student_number,student_password,student_class from student LIMIT ?
+2020-12-20 11:14:16.881 DEBUG 19452 --- [http-nio-9090-exec-2] c.c.e.m.AdminStudentMapper.listStudent   : ==> Parameters: 10(Integer)
+2020-12-20 11:14:16.883 DEBUG 19452 --- [http-nio-9090-exec-2] c.c.e.m.AdminStudentMapper.listStudent   : <==      Total: 3

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+    <title>学生新增</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+    <link rel="stylesheet" href="../../static/css/me.css">
+
+</head>
+<body>
+
+<!--导航-->
+<!--inverted:反转.会变成黑色-->
+<nav th:replace="admin/_fragments :: menu(2)"  class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--stackable 适应移动端-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item" style="font-family: STSong">管理系统</h2>
+            <a href="#" class="m-item item m-mobile-hide active" ><i class="user icon"></i>教师管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="user outline icon"></i>学生管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>书籍管理</a>
+
+            <!--头像-->
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="https://picsum.photos/id/1/100/100" alt="" class="ui avatar image">
+                        管理员
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--移动端的列表按钮  toggle black无显示意义，只用于类似id作用-->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--二级导航-->
+<div class="ui attached pointing menu m-shadow-small">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" class="active item">单独添加</a>
+            <a href="#" th:href="@{/admin/students/bulkInput}" class="item">批量导入</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!--中间内容-->
+<div class="m-padded-tb-big m-container-small">
+    <div class="ui container">
+        <form action="#" th:object="${student}" th:action="*{student_id}==null ? @{/admin/students} : @{/admin/students/{student_id}(student_id=*{student_id})}"
+              method="post" class="ui form">
+            <!--id-->
+            <input type="hidden" name="student_id" th:value="*{student_id}!=null ? *{student_id}">
+
+            <!-- 账号和密码都是学号 -->
+            <input type="hidden" name="student_password" th:value="*{student_name}!=null ? *{student_name}">
+
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">学生编号</label>
+                    <input type="text" name="student_number" th:value="*{student_number}!=null ? *{student_number}" placeholder="学生编号">
+                </div>
+
+            </div>
+
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">学生姓名</label>
+                    <input type="text" name="student_name" th:value="*{student_name}!=null ? *{student_name}" placeholder="学生姓名">
+                </div>
+
+            </div>
+
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">所属班级</label>
+                    <input type="text" name="student_class" th:value="*{student_class}!=null ? *{student_class}" placeholder="所属班级">
+                </div>
+
+            </div>
+
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">登陆密码</label>
+                    <input type="text" name="student_password" th:value="*{student_password}!=null ? *{student_password}" placeholder="登陆密码">
+                </div>
+
+            </div>
+
+<!--            &lt;!&ndash;密码提示&ndash;&gt;-->
+<!--            <div class="ui mini teal message">提示：学生登录密码默认与编号一致</div>-->
+
+            <!--错误提示-->
+            <div class="ui error message"></div>
+            <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="|提示： ${message}">
+                提示：不能添加重复的标签
+            </div>
+
+            <div class="ui right aligned container">
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui teal submit button">提交</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!--CDN版本,不需要下载-->
+<!--连接jsdeliver-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--链接semantic UI-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<!--对头菜单移动端的应用-->
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+    // 关闭消息提示
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        })
+    ;
+
+    $('.ui.form').form({
+        fields: {
+            name: {
+                identifier: 'student_name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入学生姓名'
+                }]
+            },
+            number: {
+                identifier: 'student_number',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入学生学号'
+                }]
+            },
+            class: {
+                identifier: 'student_class',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入学生班级'
+                }]
+            },
+
+        }
+    });
+
+</script>
+</body>
+</html>

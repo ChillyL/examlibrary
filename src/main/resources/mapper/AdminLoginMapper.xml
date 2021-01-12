@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.AdminLoginMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="adminResult" type="com.chilly.examlibrary.entity.Admin">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="admin_id" property="admin_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="admin_name" property="admin_name" javaType="String" jdbcType="VARCHAR"/>
+        <result column="admin_number" property="admin_number" javaType="String" jdbcType="VARCHAR"/>
+        <result column="admin_password" property="admin_password" javaType="String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">-->
+    <select id="adminLogin" resultMap="adminResult" parameterType="string">
+        select *
+        from admin
+        where admin_number =#{number} and admin_password =#{password}
+    </select>
+</mapper>

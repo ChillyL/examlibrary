@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+    <title>教师管理</title>
+
+    <link rel="stylesheet" type="text/css" href="../../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+    <link rel="stylesheet" href="../../static/css/me.css">
+
+</head>
+<body>
+
+<!--导航-->
+<!--inverted:反转.会变成黑色-->
+<nav th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--stackable 适应移动端-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item" style="font-family: STSong">管理系统</h2>
+            <a href="#" class="m-item item m-mobile-hide" ><i class="user icon"></i>教师管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="user outline icon"></i>学生管理</a>
+            <a href="#" class="m-item item m-mobile-hide active"><i class="idea icon"></i>分类管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>书籍管理</a>
+
+            <!--头像-->
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="https://picsum.photos/id/1/100/100" alt="" class="ui avatar image">
+                        管理员
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--移动端的列表按钮  toggle black无显示意义，只用于类似id作用-->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--二级导航-->
+<div class="ui attached pointing menu m-shadow-small">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/classify/input}" class="item active">添加</a>
+            <a href="#" th:href="@{/admin/classify}" class="item">列表</a>
+        </div>
+    </div>
+
+</div>
+
+
+<!--中间内容-->
+<div class="m-padded-tb-big m-container-small">
+    <div class="ui container">
+        <form action="#" method="post" th:object="${classify}"
+              th:action="*{classify_id}==null ? @{/admin/classify} : @{/admin/classify/{classify_id}(classify_id=*{classify_id})}" class="ui form">
+            <input type="hidden" name="classify_id" th:value="*{classify_id}">
+            <div class="field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">名称</label>
+                    <input type="text" name="classify_name" placeholder="标签名称" th:value="*{classify_name}">
+                </div>
+
+            </div>
+
+
+            <!--错误提示-->
+            <div class="ui error message"></div>
+            <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="|提示： ${message}">
+                提示：不能添加重复的标签
+            </div>
+
+            <div class="ui right aligned container">
+                <button class="ui button" type="button" onclick="window.history.go(-1)">返回</button>
+                <button class="ui teal submit button">提交</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!--CDN版本,不需要下载-->
+<!--连接jsdeliver-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--链接semantic UI-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<!--对头菜单移动端的应用-->
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+    // 关闭消息提示
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        })
+    ;
+
+
+</script>
+</body>
+</html>

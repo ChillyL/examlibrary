@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.AnswerMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="answerResult" type="com.chilly.examlibrary.entity.Answer">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="answer_id" property="answer_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="answer_content" property="answer_content" javaType="String" jdbcType="VARCHAR"/>
+        <result column="problem_id" property="problem_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="answer_book_id" property="answer_book_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="answer_student_id" property="answer_student_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="answer_score" property="answer_score"/>
+
+        <association property="student" javaType="com.chilly.examlibrary.entity.Student">
+            <id column="student_id" property="student_id" javaType="Long" jdbcType="BIGINT"/>
+            <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+            <result column="student_name" property="student_name" javaType="String" jdbcType="VARCHAR"/>
+            <result column="student_number" property="student_number" javaType="String" jdbcType="VARCHAR"/>
+            <result column="student_password" property="student_password" javaType="String" jdbcType="VARCHAR"/>
+            <result column="student_class" property="student_class" javaType="String" jdbcType="VARCHAR"/>
+        </association>
+
+    </resultMap>
+
+    <select id="getAnswerByStudentAndBook" parameterType="long" resultMap="answerResult">
+        select a.answer_id,a.answer_content,a.problem_id,a.answer_book_id,a.answer_student_id,a.answer_score,
+        s.student_id,s.student_name,s.student_number,s.student_password,s.student_class
+        from answer a,student s
+        where a.answer_student_id = s.student_id
+        and answer_student_id=#{studentId} and answer_book_id=#{bookId}
+    </select>
+
+    <insert id="saveAnswer" parameterType="com.chilly.examlibrary.entity.Answer">
+        insert into answer
+        (problem_id,answer_book_id,answer_content,answer_student_id,answer_score)
+        values
+        (#{problem_id},#{answer_book_id},#{answer_content},#{answer_student_id},#{answer_score})
+    </insert>
+
+    <update id="updateAnswer" parameterType="com.chilly.examlibrary.entity.Answer">
+        update answer set problem_id=#{problem_id},answer_book_id=#{answer_book_id},
+        answer_content=#{answer_content},answer_student_id=#{answer_student_id},answer_score=#{answer_score}
+        where answer_id=#{answer_id}
+    </update>
+
+    <select id="getAnswerById" parameterType="long" resultMap="answerResult">
+        select answer_id,answer_content,problem_id,answer_book_id,answer_student_id,answer_score
+        from answer
+        where answer_id=#{answerId}
+    </select>
+
+</mapper>

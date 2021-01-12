@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.CommentMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="theCommentResult" type="com.chilly.examlibrary.entity.Comment">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="comment_id" property="comment_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="comment_user_name" property="comment_user_name" jdbcType="VARCHAR"/>
+        <result column="comment_user_number" property="comment_user_number" jdbcType="VARCHAR"/>
+        <result column="comment_content" property="comment_content" jdbcType="VARCHAR"/>
+        <result column="comment_teacher" property="comment_teacher" javaType="boolean" jdbcType="TINYINT"/>
+        <result column="comment_createTime" property="comment_createTime" javaType="Date" jdbcType="TIMESTAMP"/>
+        <result column="comment_book_id" property="comment_book_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="parent_comment_id" property="parent_comment_id" javaType="Long" jdbcType="BIGINT"/>
+
+    </resultMap>
+
+    <insert id="saveComment" parameterType="com.chilly.examlibrary.entity.Comment">
+        insert into comment (comment_user_name,comment_user_number,comment_content,comment_teacher,comment_createTime,
+        comment_book_id,parent_comment_id)
+        values (#{comment_user_name},#{comment_user_number},#{comment_content},#{comment_teacher},
+        #{comment_createTime},#{comment_book_id},#{parent_comment_id});
+    </insert>
+
+
+    <select id="findByBookIdParentIdNull" resultMap="theCommentResult">
+        select *
+        from comment c
+        where c.comment_book_id =#{book_id} and isnull(c.parent_comment_id)
+        order by c.comment_createTime desc
+    </select>
+
+    <!--查询一级子评论-->
+    <select id="findByBookIdParentIdNotNull" resultMap="theCommentResult">
+        select *
+        from comment c
+        where c.comment_book_id =#{book_id} and c.parent_comment_id =#{comment_id}
+        order by c.comment_createTime desc
+    </select>
+
+    <!--查询二级子评论-->
+    <select id="findByBookIdAndReplayId" resultMap="theCommentResult">
+        select *
+        from comment c
+        where c.comment_book_id =#{book_id} and c.parent_comment_id =#{childId}
+        order by c.comment_createTime desc
+    </select>
+
+    <!--<select id="findByParentCommentId" resultType="com.star.entity.Comment">-->
+    <!--select c.id cid,c.nickname,c.email,c.content,c.avatar,c.create_time,c.blog_id,c.parent_comment_id-->
+    <!--from myblog.t_comment c-->
+    <!--where c.parent_comment_id = #{parentCommentId}-->
+    <!--</select>-->
+
+    <!--删除评论-->
+    <delete id="deleteComment">
+        delete from comment where comment_id =#{comment_id}
+    </delete>
+</mapper>

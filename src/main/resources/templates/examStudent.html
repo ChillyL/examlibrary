@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>思考题详情</title>
+
+  <link rel="stylesheet" type="text/css" href="../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+
+  <script src="../static/assets/library/jquery.min.js" th:src="@{/assets/library/jquery.min.js}"></script>
+  <script src="../static/dist/components/transition.js" th:src="@{/dist/components/transition.js}" ></script>
+  <script src="../static/dist/components/dropdown.js" th:src="@{/dist/components/dropdown.js}" ></script>
+  <script src="../static/dist/components/visibility.js" th:src="@{/dist/components/visibility.js}"></script>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix main menu to page on passing
+      $('.main.menu').visibility({
+        type: 'fixed'
+      });
+      $('.overlay').visibility({
+        // type: 'fixed',
+        offset: 80
+      });
+
+      // lazy load images
+      $('.image').visibility({
+        type: 'image',
+        transition: 'vertical flip in',
+        duration: 500
+      });
+
+      // show dropdown on hover
+      $('.main.menu  .ui.dropdown').dropdown({
+        on: 'hover'
+      });
+    })
+  ;
+  </script>
+
+  <style type="text/css">
+
+  body {
+    background-color: #FFFFFF;
+  }
+  .main.container {
+    margin-top: 2em;
+  }
+
+  .main.menu {
+    margin-top: 4em;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    transition:
+      box-shadow 0.5s ease,
+      padding 0.5s ease
+    ;
+  }
+  .main.menu .item img.logo {
+    margin-right: 1.5em;
+  }
+
+  .text.container .left.floated.image {
+    margin: 2em 2em 2em -4em;
+  }
+  .text.container .right.floated.image {
+    margin: 2em -4em 2em 2em;
+  }
+
+  .ui.footer.segment {
+    margin: 5em 0em 0em;
+    padding: 5em 0em;
+  }
+  </style>
+
+</head>
+<body>
+
+  <div class="ui borderless main menu"  style="background-image:url('https://picsum.photos/id/379/2000/500');">
+    <div class="ui text container">
+      <div class="header item">
+        <a href="" th:href="@{/}"><h3 style="color: #b98286;font-family: STSong;">通识阅读</h3></a>
+      </div>
+      <a class="item"><h4 th:text="${book.book_title}">《明朝那些事儿》</h4></a>
+    </div>
+  </div>
+
+  <div class="ui text container">
+
+    <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+      <i class="close icon"></i>
+      <div class="header">提示：</div>
+      <p th:text="${message}">恭喜，操作成功！</p>
+    </div>
+
+    <h4 class="ui horizontal header divider" style="margin: 0em 0em 3em">
+      思考题
+    </h4>
+
+    <p class="m-text-thin" th:utext="${problem.problem_content}">
+      1、观后感<br>
+      2、明朝<br>
+    </p>
+
+    <form action="#" th:object="${answer}" th:action="*{answer_id}==null ? @{/book/answer} : @{/book/answer/update}"
+          method="post" class="ui form">
+      <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+        答案
+      </h4>
+
+
+      <div id="answer_editor" th:utext="*{answer_content}">
+
+      </div>
+      <input type="hidden" name="answer_content">
+
+      <input type="hidden" name="answer_student_id" th:value="${session.student.student_id}">
+      <input type="hidden" name="answer_book_id" th:value="${book.book_id}">
+      <input type="hidden" name="answer_id" th:value="*{answer_id}">
+      <input type="hidden" name="problem_id" th:value="${problem.problem_id}">
+
+      <h3 class="ui horizontal header divider" style="margin: 5em 0em 3em" th:unless="*{answer_id}">
+        <button id="btn" href="#" style="color: #b98286;">提交</button>
+      </h3>
+
+      <h3 class="ui horizontal header divider" style="margin: 5em 0em 3em" th:if="*{answer_id}">
+        <button id="btn" href="#" onclick="alert('确定修改原本的答案吗？')" style="color: #b98286;">修改</button>
+      </h3>
+
+    </form>
+  </div>
+
+  <div class="ui vertical footer segment" style="background-image:url('https://picsum.photos/id/379/2000/2000');">
+    <div class="ui container">
+      <div class="ui stackable divided equal height stackable grid">
+        <div class="wide column">
+          <h4 class="ui header">阅读库</h4>
+          <p>五邑大学文学院。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- 使用wangEditor富文档，注意，只需要引用 JS，无需引用任何 CSS ！！！-->
+  <script type="text/javascript" src="../static/js/wangEditor.min.js" th:src="@{/js/wangEditor.min.js}"></script>
+  <script type="text/javascript">
+      var E = window.wangEditor
+      var answer_editor = new E('#answer_editor')
+      // 或者 var editor = new E( document.getElementById('editor') )
+      answer_editor.create()
+
+      document.getElementById('btn').addEventListener('click', function () {
+          // 读取 html
+          // alert(content_editor.txt.html())
+          // alert(answer_editor.txt.html())
+
+          //赋值
+          $('[name="answer_content"]').val(answer_editor.txt.html());
+
+
+      }, false)
+  </script>
+
+  <script>
+    // 关闭消息提示
+    $('.message .close')
+            .on('click', function() {
+              $(this)
+                      .closest('.message')
+                      .transition('fade')
+              ;
+            })
+    ;
+  </script>
+
+</body>
+
+</html>

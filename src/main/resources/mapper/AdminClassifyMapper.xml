@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.AdminClassifyMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="classifyResult" type="com.chilly.examlibrary.entity.Classify">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="classify_id" property="classify_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="classify_name" property="classify_name" javaType="String" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">-->
+    <select id="getClassify" resultMap="classifyResult" parameterType="long">
+        select *
+        from classify
+        where classify_id =#{classify_id};
+    </select>
+
+    <select id="getClassifyByName" resultMap="classifyResult" parameterType="String">
+        select *
+        from classify
+        where classify_name =#{classify_name};
+    </select>
+
+    <insert id="saveClassify" parameterType="com.chilly.examlibrary.entity.Classify">
+        insert into classify
+        values (#{classify_id},#{classify_name});
+    </insert>
+
+    <select id="listClassify" resultMap="classifyResult">
+        select *
+        from classify
+    </select>
+
+    <update id="updateClassify" parameterType="com.chilly.examlibrary.entity.Classify">
+        update classify set classify_name =#{classify_name}
+        where classify_id =#{classify_id};
+    </update>
+
+    <delete id="deleteClassify" parameterType="long">
+        delete from classify
+        where classify_id =#{classify_id};
+    </delete>
+</mapper>

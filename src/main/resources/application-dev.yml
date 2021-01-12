@@ -1,0 +1,28 @@
+spring:
+  thymeleaf:
+    cache: false
+  servlet:
+    multipart:
+      enabled: true
+  #  100M
+      max-file-size: 104857600
+  #  1000M
+      max-request-size: 1048576000
+      file-size-threshold: 0
+      resolve-lazily: false
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/exam_library?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: root
+
+logging:
+  level:
+    root: info
+    com.chilly: debug
+  file:
+    path: log/examlibrary-dev.log
+
+server:
+  port: 8080

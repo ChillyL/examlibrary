@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.UserLoginMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="teacherResult" type="com.chilly.examlibrary.entity.Teacher">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="teacher_id" property="teacher_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="teacher_name" property="teacher_name" javaType="String" jdbcType="VARCHAR"/>
+        <result column="teacher_number" property="teacher_number" javaType="String" jdbcType="VARCHAR"/>
+        <result column="teacher_password" property="teacher_password" javaType="String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="teacherLogin" resultMap="teacherResult" parameterType="string">
+        select *
+        from teacher
+        where teacher_number =#{number} and teacher_password =#{password}
+    </select>
+
+
+    <resultMap id="studentResult" type="com.chilly.examlibrary.entity.Student">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="student_id" property="student_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="student_number" property="student_number" javaType="String" jdbcType="VARCHAR"/>
+        <result column="student_name" property="student_name" javaType="String" jdbcType="VARCHAR"/>
+        <result column="student_password" property="student_password" javaType="String" jdbcType="VARCHAR"/>
+        <result column="student_class" property="student_class" javaType="String" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <select id="studentLogin" resultMap="studentResult" parameterType="string">
+        select *
+        from student
+        where student_number =#{number} and student_password =#{password}
+    </select>
+</mapper>
