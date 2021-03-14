@@ -32,11 +32,17 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, RedirectAttributes attributes) {
 
+        return "index";
+    }
+
+    @GetMapping("/common")
+    public String common(Model model, RedirectAttributes attributes) {
+
         HashMap<String, List<BookQuery>> listHashMap = userBookService.listBook();
 
         model.addAttribute("listHashMap", listHashMap);
 
-        return "index";
+        return "common";
     }
 
     @GetMapping("/book/{book_id}")

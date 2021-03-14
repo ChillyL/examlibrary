@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>中文专业技能过关</title>
+  <title>专业阅读与写作</title>
 <!--  <link rel="stylesheet" type="text/css" href="../static/dist/components/reset.css">-->
 <!--  <link rel="stylesheet" type="text/css" href="../static/dist/components/site.css">-->
 
@@ -27,7 +27,6 @@
 <!--  <link rel="stylesheet" type="text/css" href="../static/dist/components/transition.css">-->
 
   <link rel="stylesheet" type="text/css" href="../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
-
 
   <!--引入目录自动生成器（根据id生成）-->
   <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}"/>
@@ -138,7 +137,6 @@
   <script src="../static/dist/components/sidebar.js" th:src="@{/dist/components/sidebar.js}"></script>
   <script src="../static/dist/components/transition.js" th:src="@{/dist/components/transition.js}"></script>
   <script src="../static/assets/library/iframe-content.js" th:src="@{/assets/library/iframe-content.js}"></script>
-  <script type="text/javascript" src="../static/dist/components/dimmer.js" th:src="@{/dist/components/dimmer.js}"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
@@ -182,18 +180,6 @@
       //   .sidebar('attach events', '.toc.item')
       // ;
 
-      $('.special.card .image').dimmer({
-        on: 'hover'
-      });
-      $('.star.rating')
-              .rating()
-      ;
-      $('.card .dimmer')
-              .dimmer({
-                on: 'hover'
-              })
-      ;
-
     })
   ;
   </script>
@@ -203,6 +189,8 @@
 <!-- Following Menu -->
 <div class="ui large top fixed secondary hidden menu" style="background-image:url('https://picsum.photos/id/379/2000/500');">
   <div class="ui container">
+    <a class="active item" th:href="@{/}">首页</a>
+
 
     <div class="right menu">
       <div class="item">
@@ -227,6 +215,16 @@
   </div>
 </div>
 
+<!--&lt;!&ndash; Sidebar Menu &ndash;&gt;-->
+<!--<div class="ui vertical inverted sidebar menu">-->
+  <!--<a class="active item">通识阅读</a>-->
+  <!--<a class="item">专业阅读</a>-->
+  <!--<a class="item">文体阅读</a>-->
+
+  <!--<a class="item">登录</a>-->
+  <!--&lt;!&ndash;<a class="item">Signup</a>&ndash;&gt;-->
+<!--</div>-->
+
 
 <!-- Page Contents -->
 <div class="pusher">
@@ -237,6 +235,8 @@
         <!--<a class="toc item">-->
           <!--<i class="sidebar icon"></i>-->
         <!--</a>-->
+        <a class="active item" th:href="@{/}">首页</a>
+
         <div class="right item">
           <a class="ui button" href="login.html" th:unless="${session.teacher} or ${session.student}" th:href="@{/user}">登录</a>
 
@@ -257,7 +257,7 @@
 
     <div class="ui text container">
       <h1 class="ui header" style="font-family: STSong;font-weight:bold;">
-        中文专业技能过关
+        专业阅读与写作
       </h1>
 <!--      <h2>在阅读中提高自己</h2>-->
 <!--      <p><i class="angle double down icon"></i></p>-->
@@ -265,108 +265,39 @@
 
   </div>
 
-  <div class="ui container">
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="ui three cards">
+  <!--生成目录-->
+  <!--<div class="ui toc-container flowing popup transition hidden" style="width: 250px !important;">-->
+    <!--<ol class="js-toc">-->
 
-      <a href="#" th:href="@{/common}" class="ui card">
-        <div class="content">
-          <div class="header">通识阅读</div>
-          <br>
-          <div class="meta">
-            <span class="category">宗旨：</span>
-          </div>
-          <div class="description">
-            <div class="content">
-              <p>在新文科建设的背景下，引导学生适应全球新科技革命、新经济发展、中国特色社会主义进入新时代的新形势，促进学生跨学科通识阅读，扩展学生的知识视野，培养学生的创新思维。</p>
-            </div>
-          </div>
-          <br>
-          <div class="meta">
-            <span class="category">修读要求：</span>
-          </div>
-          <div class="description">
-            <div class="content">
-              <p>设置第二课堂1学分制</p>
-            </div>
-          </div>
+    <!--</ol>-->
+  <!--</div>-->
+
+  <div class="ui vertical stripe segment js-toc-content">
+    <!--生成目录-->
+    <div class="overlay">
+
+      <div class="ui labeled icon vertical basic menu toc-container" style="background-color: #cdcdd0;">
+        <p>分类目录</p>
+        <ol class="js-toc">
+
+        </ol>
+      </div>
+    </div>
+    <div class="ui text container center aligned" th:each="bookList,index : ${listHashMap}">
+      <h4 class="ui horizontal header divider" th:id="toc_+(${bookList.key})" th:text="${bookList.key}">
+        语录
+      </h4>
+
+      <div class="ui card" style="width: 100%!important;">
+        <div class="content" th:each="book : ${bookList.value}">
+          <a href="articles.html" style="color: #b98286" th:text="${book.book_title}"
+          th:href="@{/book/{book_id}(book_id=${book.book_id})}">第3、4讲 语录与语类文献</a>
         </div>
-        <div class="extra content">
-          <div class="right floated author">
-            <!--            <img src="../assets/images/wireframe/square-image.png" class="ui avatar image"> Username-->
-            <i class="ui icon angle double right"></i>前往
-          </div>
-        </div>
-      </a>
-      <a href="#" onclick="alert('该功能暂未开放，敬请期待');" class="ui card">
-        <div class="content">
-          <div class="header">专业阅读与写作</div>
-          <br>
-          <div class="meta">
-            <span class="category">宗旨：</span>
-          </div>
-          <div class="description">
-            <div class="content">
-              <p>在新文科建设的背景下，引导学生适应全球新科技革命、新经济发展、中国特色社会主义进入新时代的新形势，促进学生跨学科通识阅读，扩展学生的知识视野，培养学生的创新思维。</p>
-            </div>
-          </div>
-          <br>
-          <div class="meta">
-            <span class="category">修读要求：</span>
-          </div>
-          <div class="description">
-            <div class="content">
-              <p>设置第二课堂1学分制</p>
-            </div>
-          </div>
-        </div>
-        <div class="extra content">
-          <div class="right floated author">
-            <!--            <img src="../assets/images/wireframe/square-image.png" class="ui avatar image"> Username-->
-            <i class="ui icon angle double right"></i>前往
-          </div>
-        </div>
-      </a>
-      <a href="#" onclick="alert('该功能暂未开放，敬请期待');" class="ui card">
-        <div class="content">
-          <div class="header">创意写作</div>
-          <br>
-          <div class="meta">
-            <span class="category">宗旨：</span>
-          </div>
-          <div class="description">
-            <div class="content">
-              <p>在新文科建设的背景下，引导学生适应全球新科技革命、新经济发展、中国特色社会主义进入新时代的新形势，促进学生跨学科通识阅读，扩展学生的知识视野，培养学生的创新思维。</p>
-            </div>
-          </div>
-          <br>
-          <div class="meta">
-            <span class="category">修读要求：</span>
-          </div>
-          <div class="description">
-            <div class="content">
-              <p>设置第二课堂1学分制</p>
-            </div>
-          </div>
-        </div>
-        <div class="extra content">
-          <div class="right floated author">
-<!--            <img src="../assets/images/wireframe/square-image.png" class="ui avatar image"> Username-->
-            <i class="ui icon angle double right"></i>前往
-          </div>
-        </div>
-      </a>
+      </div>
 
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-  </div>
 
+  </div>
 
   <div class="ui vertical footer segment" style="background-image:url('https://picsum.photos/id/379/2000/2000');">
     <div class="ui container">

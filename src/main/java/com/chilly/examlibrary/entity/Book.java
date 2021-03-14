@@ -12,12 +12,22 @@ public class Book {
     private String book_data;     //书籍相关的资料路径
     private String book_createTime; //出版时间
     private String book_publisher; //出版社
+    private String book_directory; //书籍目录
 
     private Long book_teacher_id;  //对应推荐该书的老师的ID
     private Teacher teacher;
 
     private Long book_classify_id; //书籍分类
     private Classify classify;
+
+
+    public String getBook_directory() {
+        return book_directory;
+    }
+
+    public void setBook_directory(String book_directory) {
+        this.book_directory = book_directory;
+    }
 
     public String getBook_publisher() {
         return book_publisher;
@@ -125,6 +135,7 @@ public class Book {
                 ", book_data='" + book_data + '\'' +
                 ", book_createTime='" + book_createTime + '\'' +
                 ", book_publisher='" + book_publisher + '\'' +
+                ", book_directory='" + book_directory + '\'' +
                 ", book_teacher_id=" + book_teacher_id +
                 ", teacher=" + teacher +
                 ", book_classify_id=" + book_classify_id +

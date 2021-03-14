@@ -120,7 +120,8 @@
         </tr>
         <tr>
           <td class="left aligned">相关资料下载</td>
-          <form class="form-signin" th:action="@{/book/download?(book_data=${book.book_data})}" method="post">
+          <td th:unless="${book.book_data} == null">无相关资料</td>
+          <form class="form-signin" th:action="@{/book/download?(book_data=${book.book_data})}" method="post" th:unless="${book.book_data} != null">
             <td><button class="ui basic submit button">下载</button></td>
             <p style="color: red" th:text="${result}" th:if="${not #strings.isEmpty(result)}"></p>
           </form>
@@ -134,6 +135,19 @@
     </h4>
 
     <p th:text="${book.book_intro}">《明朝那些事儿》这篇文主要讲述的是从1344年到1644年这三百年间关于明朝的一些事情，以史料为基础，以年代和具体人物为主线，并加入了小说的笔法，对明朝十七帝和其他王公权贵和小人物的命运进行全景展示，尤其对官场政治、战争、帝王心术着墨最多，并加入对当时政治经济制度、人伦道德的演义。</p>
+
+    <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+      书籍目录
+    </h4>
+
+    <span id="book_directory">
+      <p class="m-text-thin" th:utext="${book.book_directory}">
+        第一章 皇太极 …………………………………………………………………… 138<br>
+        第二章 宁远，决战 ……………………………………………………………… 139<br>
+      </p>
+    </span>
+    <a href="javascript:;" id="btn">收缩</a>
+
 
     <h3 class="ui horizontal header divider" style="margin: 5em 0em 3em">
       <a href="#" target="_blank" th:href="${session.teacher}? @{/book/problem/input/{bookId}(bookId=${book.book_id})}:@{/book/answer/input/{studentId}/{bookId}(studentId=${session.student.student_id},bookId=${book.book_id})}">点击进入相关思考题</a>
@@ -312,6 +326,32 @@
       $("[name='parentComment.comment_id']").val(commentId);  //赋值
       $(window).scrollTo($('#comment-form'), 500);   //滚动
     }
+
+    //获取button按钮
+    var btn = document.getElementById('btn');
+    //获取p
+    var content = document.getElementById('book_directory');
+    console.log(content)
+    //获取p中的内容
+    var str = content.innerHTML;
+    //定义一个变量，表示当前的状态（收缩、展开）
+    content.innerHTML = str.substr(0, 50) + "......";
+    btn.innerHTML = '展开'
+
+    var onOff = false; // true表示展开
+    btn.onclick = function() {
+      if (onOff) {
+        content.innerHTML = str.substr(0, 50) + "......";
+        btn.innerHTML = '展开'
+      } else {
+        //说明当前状态是收缩的，需要展开
+        content.innerHTML = str
+        btn.innerHTML = '收缩';
+      }
+      onOff = !onOff; //每点击一次，改变一次展开、收缩状态
+      return false; //阻止a标签的默认事件
+    }
+
   </script>
 
 </body>

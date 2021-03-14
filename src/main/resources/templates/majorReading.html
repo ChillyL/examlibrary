@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <!-- Site Properties -->
+  <title>专业阅读详情</title>
+
+  <link rel="stylesheet" type="text/css" href="../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+
+  <script src="../static/assets/library/jquery.min.js" th:src="@{/assets/library/jquery.min.js}"></script>
+  <script src="../static/dist/components/transition.js" th:src="@{/dist/components/transition.js}"></script>
+  <script src="../static/dist/components/dropdown.js" th:src="@{/dist/components/dropdown.js}"></script>
+  <script src="../static/dist/components/visibility.js" th:src="@{/dist/components/visibility.js}"></script>
+
+  <script>
+    $(document)
+            .ready(function() {
+
+              // fix main menu to page on passing
+              $('.main.menu').visibility({
+                type: 'fixed'
+              });
+              $('.overlay').visibility({
+                type: 'fixed',
+                offset: 80
+              });
+
+              // lazy load images
+              $('.image').visibility({
+                type: 'image',
+                transition: 'vertical flip in',
+                duration: 500
+              });
+
+              // show dropdown on hover
+              $('.main.menu  .ui.dropdown').dropdown({
+                on: 'hover'
+              });
+            })
+    ;
+  </script>
+
+  <style type="text/css">
+
+    body {
+      background-color: #FFFFFF;
+    }
+    .main.container {
+      margin-top: 2em;
+    }
+
+    .main.menu {
+      margin-top: 4em;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      transition:
+              box-shadow 0.5s ease,
+              padding 0.5s ease
+    ;
+    }
+    .main.menu .item img.logo {
+      margin-right: 1.5em;
+    }
+
+    .overlay {
+      float: left;
+      margin: 0em 3em 1em 0em;
+    }
+    .overlay .menu {
+      position: relative;
+      left: 0;
+      transition: left 0.5s ease;
+    }
+
+    .main.menu.fixed {
+      background-color: #FFFFFF;
+      border: 1px solid #DDD;
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    }
+    .overlay.fixed .menu {
+      left: 800px;
+    }
+
+    .text.container .left.floated.image {
+      margin: 2em 2em 2em -4em;
+    }
+    .text.container .right.floated.image {
+      margin: 2em -4em 2em 2em;
+    }
+
+    .ui.footer.segment {
+      margin: 5em 0em 0em;
+      padding: 5em 0em;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="ui main text container">
+  <h1 class="ui header">第3、4讲 语录与语类文献</h1>
+</div>
+
+
+<div class="ui borderless main menu">
+  <div class="ui text container">
+    <div class="header item">
+      <a href="#">返回首页</a>
+    </div>
+    <a href="#" class="active item">课程内容</a>
+    <a href="#" class="item">阅读与写作</a>
+<!--    <a href="#" class="ui right floated dropdown item">-->
+<!--      Dropdown <i class="dropdown icon"></i>-->
+<!--      <div class="menu">-->
+<!--        <div class="item">Link Item</div>-->
+<!--        <div class="item">Link Item</div>-->
+<!--        <div class="divider"></div>-->
+<!--        <div class="header">Header Item</div>-->
+<!--        <div class="item">-->
+<!--          <i class="dropdown icon"></i>-->
+<!--          Sub Menu-->
+<!--          <div class="menu">-->
+<!--            <div class="item">Link Item</div>-->
+<!--            <div class="item">Link Item</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="item">Link Item</div>-->
+<!--      </div>-->
+<!--    </a>-->
+  </div>
+</div>
+
+<div class="ui text container">
+  <p>这里是一段简介</p>
+
+  <div class="overlay">
+    <div class="ui labeled icon vertical menu">
+      <a class="item"><i class="mail icon"></i>课程资料下载</a>
+    </div>
+  </div>
+
+  <p>以往我们学习散文，是在文学史的视角下，一般分为历史散文和哲学散文，从语言、人物形象、艺术风格进行传授。写作课，大多是应用写作的实训。这两种观照角度对于修饰语言的方法以及其中所藏的深刻的睿智尚未论及。
+    思想参与下的修辞训练：观赏不如亲近，亲近不如使用，“语言艺术必须通过使用才能激活，赋予我们信念与前行的力量。”“人类把握世界的三种方式---认知、评价、审美”，我们要遵从这种方式来激发学生。使学生在文体的学习中，参与到思想基本哲理的表达，然后知道语言艺术的美妙。
+    思想参与下的文体写作：它的价值在于思想的延展和文体的流变相伴而生。这种视角重视文体的“义理范畴”。同时，也体现了中国文体成熟的独特路径。我们将文体学引进文学史，基于这样一个学术理念：话语体式和一个学派内在的肌理是相连的。文体形态是人类感受世界、把握世界、阐释世界的方式之一，它们是历史的产物，积淀着深厚的文化内蕴。当特定的文体形态与群体的感受方式和时代精神相对应时，才得到普遍的接受。我们重新思考一些我们过去习之为常的事情。从而获得一种深广的语言与文化内涵。这是我们今天想要培养的新的智力主体。
+  </p>
+
+  <br>
+  <br>
+  <br>
+
+  <h4 class="ui horizontal header divider" style="margin: 0em 0em 3em">
+    课内实训
+  </h4>
+
+  <p class="m-text-thin" th:utext="${problem.problem_content}">
+    1、观后感<br>
+    2、明朝<br>
+  </p>
+
+  <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
+    实训交流
+  </h4>
+
+  <!--留言区域-->
+
+  <div id="comment-container" class="ui segment">
+    <div th:fragment="commentList">
+      <div class="ui threaded comments" style="max-width: 100%;">
+
+        <h3 class="ui dividing header">评论</h3>
+        <div class="comment" th:each="comment : ${comments}">
+          <a class="avatar">
+            <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1010/100/100}">
+          </a>
+          <div class="content">
+            <a class="author">
+              <span th:text="${comment.comment_user_name}">Matt</span>
+              <div class="ui mini basic left pointing label m-padded-mini" style="color: #b98286;"
+                   th:if="${comment.comment_teacher}">老师
+              </div>
+            </a>
+            <div class="metadata">
+                                    <span class="date"
+                                          th:text="${#dates.format(comment.comment_createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+            </div>
+            <div class="text" th:text="${comment.comment_content}">
+              How artistic!
+            </div>
+            <div class="actions">
+              <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                 th:attr="data-commentid=${comment.comment_id},data-commentnickname=${comment.comment_user_name}"
+                 onclick="reply(this)">回复</a>
+              <a class="delete" href="#"
+                 th:href="@{/comment/{param1}/{param2}/delete(param1=${comment.comment_book_id},param2=${comment.comment_id})}"
+                 onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.teacher}">删除</a>
+            </div>
+          </div>
+          <!--                                子集评论-->
+          <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+            <div class="comment" th:each="reply : ${comment.replyComments}">
+              <a class="avatar">
+                <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1010/100/100}">
+              </a>
+              <div class="content">
+                <a class="author">
+                  <span th:text="${reply.comment_user_name}">小红</span>
+                  <div class="ui mini basic left pointing label m-padded-mini" style="color: #b98286;"
+                       th:if="${reply.comment_teacher}">老师
+                  </div>
+                  &nbsp;<span th:text="|@ ${reply.parentName}|" class="m-teal">@ 小白</span>
+                </a>
+                <div class="metadata">
+                                            <span class="date"
+                                                  th:text="${#dates.format(reply.comment_createTime,'yyyy-MM-dd HH:mm')}">Just now</span>
+                </div>
+                <div class="text" th:text="${reply.comment_content}">
+                  Elliot you are always so right :)
+                </div>
+                <div class="actions">
+                  <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                     th:attr="data-commentid=${reply.comment_id},data-commentnickname=${reply.comment_user_name}"
+                     onclick="reply(this)">回复</a>
+                  <a class="delete" href="#"
+                     th:href="@{/comment/{param1}/{param2}/delete(param1=${reply.comment_book_id},param2=${reply.comment_id})}"
+                     onclick="alert('确定要删除该评论吗？三思啊! 删了可就没了！')"
+                     th:if="${session.user}">删除</a>
+                  <!--<a class="delete" href="#" th:href="@{/comment/{id}/delete(id=${reply.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>-->
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="comment-form" class="ui form">
+    <input type="hidden" name="bookId" th:value="${book.book_id}">
+    <input type="hidden" name="parentComment.comment_id" value="-1">
+    <input type="hidden" name="name" th:value="${session.teacher}? ${session.teacher.teacher_name}: ${session.student.student_name}">
+    <input type="hidden" name="number" th:value="${session.teacher}? ${session.teacher.teacher_number}: ${session.student.student_number}">
+    <div class="field">
+      <div id="answer_editor" th:utext="*{answer_content}">
+
+      </div>
+      <input type="hidden" name="answer_content">
+    </div>
+    <div class="field m-mobile-wide m-margin-bottom-small">
+      <button id="commentpost-btn" type="button" class="ui button m-mobile-wide m-text-thin"><i
+              class="edit icon"></i>发布
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="ui vertical footer segment" style="background-image:url('https://picsum.photos/id/379/2000/2000');">
+  <div class="ui container">
+    <div class="ui stackable divided equal height stackable grid">
+      <div class="wide column">
+        <h4 class="ui header">阅读库</h4>
+        <p>五邑大学文学院。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 使用wangEditor富文档，注意，只需要引用 JS，无需引用任何 CSS ！！！-->
+<script type="text/javascript" src="../static/js/wangEditor.min.js" th:src="@{/js/wangEditor.min.js}"></script>
+<script type="text/javascript">
+  var E = window.wangEditor
+  var answer_editor = new E('#answer_editor')
+  // 或者 var editor = new E( document.getElementById('editor') )
+  answer_editor.create()
+
+  document.getElementById('btn').addEventListener('click', function () {
+    // 读取 html
+    // alert(content_editor.txt.html())
+    // alert(answer_editor.txt.html())
+
+    //赋值
+    $('[name="answer_content"]').val(answer_editor.txt.html());
+
+
+  }, false)
+</script>
+
+</body>
+
+</html>

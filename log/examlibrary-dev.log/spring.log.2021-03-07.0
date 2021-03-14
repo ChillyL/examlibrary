@@ -1,0 +1,48 @@
+2021-03-07 10:54:21.910  INFO 10428 --- [main] c.c.examlibrary.ExamlibraryApplication   : Starting ExamlibraryApplication using Java 12.0.1 on DESKTOP-4AJAGUQ with PID 10428 (E:\MyWebDome\ExamLibrary\examlibrary\target\classes started by 13267 in E:\MyWebDome\ExamLibrary\examlibrary)
+2021-03-07 10:54:21.935 DEBUG 10428 --- [main] c.c.examlibrary.ExamlibraryApplication   : Running with Spring Boot v2.4.1, Spring v5.3.2
+2021-03-07 10:54:21.936  INFO 10428 --- [main] c.c.examlibrary.ExamlibraryApplication   : The following profiles are active: dev
+2021-03-07 10:54:24.320  INFO 10428 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-03-07 10:54:24.332  INFO 10428 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-03-07 10:54:24.335  INFO 10428 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-03-07 10:54:24.337  INFO 10428 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.21] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2021-03-07 10:54:24.337  INFO 10428 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.21] using APR version [1.6.5].
+2021-03-07 10:54:24.337  INFO 10428 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-03-07 10:54:24.338  INFO 10428 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-03-07 10:54:24.427  INFO 10428 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2021-03-07 10:54:24.605  INFO 10428 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-03-07 10:54:24.606  INFO 10428 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2544 ms
+2021-03-07 10:54:25.578  INFO 10428 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-03-07 10:54:25.733  INFO 10428 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-03-07 10:54:26.104  INFO 10428 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-03-07 10:54:26.121  INFO 10428 --- [main] c.c.examlibrary.ExamlibraryApplication   : Started ExamlibraryApplication in 5.178 seconds (JVM running for 8.318)
+2021-03-07 10:58:21.394  INFO 10428 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-03-07 10:58:21.395  INFO 10428 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-03-07 10:58:21.397  INFO 10428 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-03-07 10:58:21.452  INFO 10428 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.index', args = [{}, {}]}
+2021-03-07 10:58:21.475  INFO 10428 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : Result : index
+2021-03-07 10:58:21.475  INFO 10428 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-03-07 11:00:03.366  WARN 10428 --- [http-nio-8080-exec-9] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [885] milliseconds.
+2021-03-07 11:00:03.376  INFO 10428 --- [http-nio-8080-exec-10] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/user', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.LoginController.loginPage', args = []}
+2021-03-07 11:00:03.381  INFO 10428 --- [http-nio-8080-exec-10] com.chilly.examlibrary.aspect.LogAspect  : Result : login
+2021-03-07 11:00:03.382  INFO 10428 --- [http-nio-8080-exec-10] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-03-07 11:00:07.894  INFO 10428 --- [http-nio-8080-exec-4] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/user/login', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.LoginController.login', args = [888888, 888888, org.apache.catalina.session.StandardSessionFacade@34b29f13, {}]}
+2021-03-07 11:00:07.924  INFO 10428 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-03-07 11:00:08.403  INFO 10428 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-03-07 11:00:08.412 DEBUG 10428 --- [http-nio-8080-exec-4] c.c.e.m.A.getTeacherByNumber             : ==>  Preparing: select teacher_id,teacher_name,teacher_number,teacher_password from teacher where teacher_number =?
+2021-03-07 11:00:08.447 DEBUG 10428 --- [http-nio-8080-exec-4] c.c.e.m.A.getTeacherByNumber             : ==> Parameters: 888888(String)
+2021-03-07 11:00:08.534 DEBUG 10428 --- [http-nio-8080-exec-4] c.c.e.m.A.getTeacherByNumber             : <==      Total: 0
+2021-03-07 11:00:08.544 DEBUG 10428 --- [http-nio-8080-exec-4] c.c.e.m.UserLoginMapper.studentLogin     : ==>  Preparing: select * from student where student_number =? and student_password =?
+2021-03-07 11:00:08.545 DEBUG 10428 --- [http-nio-8080-exec-4] c.c.e.m.UserLoginMapper.studentLogin     : ==> Parameters: 888888(String), 888888(String)
+2021-03-07 11:00:08.562 DEBUG 10428 --- [http-nio-8080-exec-4] c.c.e.m.UserLoginMapper.studentLogin     : <==      Total: 1
+2021-03-07 11:00:08.563  INFO 10428 --- [http-nio-8080-exec-4] com.chilly.examlibrary.aspect.LogAspect  : Result : redirect:/
+2021-03-07 11:00:08.564  INFO 10428 --- [http-nio-8080-exec-4] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-03-07 11:00:08.591  INFO 10428 --- [http-nio-8080-exec-6] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.index', args = [{}, {}]}
+2021-03-07 11:00:08.592  INFO 10428 --- [http-nio-8080-exec-6] com.chilly.examlibrary.aspect.LogAspect  : Result : index
+2021-03-07 11:00:08.592  INFO 10428 --- [http-nio-8080-exec-6] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-03-07 11:00:10.461  INFO 10428 --- [http-nio-8080-exec-9] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-03-07 11:00:10.464 DEBUG 10428 --- [http-nio-8080-exec-9] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-03-07 11:00:10.464 DEBUG 10428 --- [http-nio-8080-exec-9] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-03-07 11:00:10.496 DEBUG 10428 --- [http-nio-8080-exec-9] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-03-07 11:00:10.497  INFO 10428 --- [http-nio-8080-exec-9] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-03-07 11:00:10.497  INFO 10428 --- [http-nio-8080-exec-9] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-03-07 11:00:10.497  INFO 10428 --- [http-nio-8080-exec-9] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------

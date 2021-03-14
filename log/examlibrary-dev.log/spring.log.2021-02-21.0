@@ -1,0 +1,93 @@
+2021-02-21 20:26:16.715  INFO 34536 --- [main] c.c.examlibrary.ExamlibraryApplication   : Starting ExamlibraryApplication using Java 12.0.1 on DESKTOP-4AJAGUQ with PID 34536 (E:\MyWebDome\ExamLibrary\examlibrary\target\classes started by 13267 in E:\MyWebDome\ExamLibrary\examlibrary)
+2021-02-21 20:26:16.723 DEBUG 34536 --- [main] c.c.examlibrary.ExamlibraryApplication   : Running with Spring Boot v2.4.1, Spring v5.3.2
+2021-02-21 20:26:16.723  INFO 34536 --- [main] c.c.examlibrary.ExamlibraryApplication   : The following profiles are active: dev
+2021-02-21 20:26:18.866  INFO 34536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-21 20:26:18.880  INFO 34536 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-21 20:26:18.882  INFO 34536 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-21 20:26:18.885  INFO 34536 --- [main] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.21] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2021-02-21 20:26:18.885  INFO 34536 --- [main] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.21] using APR version [1.6.5].
+2021-02-21 20:26:18.886  INFO 34536 --- [main] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-02-21 20:26:18.887  INFO 34536 --- [main] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-02-21 20:26:18.955  INFO 34536 --- [main] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2021-02-21 20:26:19.117  INFO 34536 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-21 20:26:19.117  INFO 34536 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2318 ms
+2021-02-21 20:26:20.129  INFO 34536 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-21 20:26:20.289  INFO 34536 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-02-21 20:26:20.696  INFO 34536 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-21 20:26:20.708  INFO 34536 --- [main] c.c.examlibrary.ExamlibraryApplication   : Started ExamlibraryApplication in 4.974 seconds (JVM running for 7.717)
+2021-02-21 20:26:33.491  INFO 34536 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-21 20:26:33.492  INFO 34536 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-21 20:26:33.494  INFO 34536 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-02-21 20:26:34.288  WARN 34536 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [752] milliseconds.
+2021-02-21 20:26:39.165  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/user', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.LoginController.loginPage', args = []}
+2021-02-21 20:26:39.191  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : Result : login
+2021-02-21 20:26:39.191  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:26:41.046  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/user/login', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.LoginController.login', args = [888888, 888888, org.apache.catalina.session.StandardSessionFacade@137ad79e, {}]}
+2021-02-21 20:26:41.096  INFO 34536 --- [http-nio-8080-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-21 20:26:41.539  INFO 34536 --- [http-nio-8080-exec-3] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-21 20:26:41.552 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.m.A.getTeacherByNumber             : ==>  Preparing: select teacher_id,teacher_name,teacher_number,teacher_password from teacher where teacher_number =?
+2021-02-21 20:26:41.576 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.m.A.getTeacherByNumber             : ==> Parameters: 888888(String)
+2021-02-21 20:26:41.625 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.m.A.getTeacherByNumber             : <==      Total: 0
+2021-02-21 20:26:41.633 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.m.UserLoginMapper.studentLogin     : ==>  Preparing: select * from student where student_number =? and student_password =?
+2021-02-21 20:26:41.634 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.m.UserLoginMapper.studentLogin     : ==> Parameters: 888888(String), 888888(String)
+2021-02-21 20:26:41.637 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.m.UserLoginMapper.studentLogin     : <==      Total: 1
+2021-02-21 20:26:41.638  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : Result : redirect:/
+2021-02-21 20:26:41.638  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:26:41.667  INFO 34536 --- [http-nio-8080-exec-4] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.index', args = [{}, {}]}
+2021-02-21 20:26:41.673  INFO 34536 --- [http-nio-8080-exec-4] com.chilly.examlibrary.aspect.LogAspect  : Result : index
+2021-02-21 20:26:41.673  INFO 34536 --- [http-nio-8080-exec-4] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:26:44.435  INFO 34536 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:26:44.438 DEBUG 34536 --- [http-nio-8080-exec-1] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:26:44.438 DEBUG 34536 --- [http-nio-8080-exec-1] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:26:44.452 DEBUG 34536 --- [http-nio-8080-exec-1] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:26:44.453  INFO 34536 --- [http-nio-8080-exec-1] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:26:44.453  INFO 34536 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:26:44.453  INFO 34536 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:29:34.286  INFO 34536 --- [http-nio-8080-exec-9] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:29:34.287 DEBUG 34536 --- [http-nio-8080-exec-9] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:29:34.288 DEBUG 34536 --- [http-nio-8080-exec-9] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:29:34.295 DEBUG 34536 --- [http-nio-8080-exec-9] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:29:34.296  INFO 34536 --- [http-nio-8080-exec-9] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:29:34.296  INFO 34536 --- [http-nio-8080-exec-9] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:29:34.296  INFO 34536 --- [http-nio-8080-exec-9] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:30:31.942  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:30:31.943 DEBUG 34536 --- [http-nio-8080-exec-8] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:30:31.944 DEBUG 34536 --- [http-nio-8080-exec-8] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:30:31.951 DEBUG 34536 --- [http-nio-8080-exec-8] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:30:31.952  INFO 34536 --- [http-nio-8080-exec-8] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:30:31.952  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:30:31.953  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:32:29.128  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:32:29.129 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:32:29.130 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:32:29.135 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:32:29.135  INFO 34536 --- [http-nio-8080-exec-3] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:32:29.136  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:32:29.136  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:33:34.685  INFO 34536 --- [http-nio-8080-exec-7] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:33:34.686 DEBUG 34536 --- [http-nio-8080-exec-7] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:33:34.687 DEBUG 34536 --- [http-nio-8080-exec-7] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:33:34.693 DEBUG 34536 --- [http-nio-8080-exec-7] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:33:34.695  INFO 34536 --- [http-nio-8080-exec-7] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:33:34.695  INFO 34536 --- [http-nio-8080-exec-7] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:33:34.695  INFO 34536 --- [http-nio-8080-exec-7] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:51:17.853  INFO 34536 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.index', args = [{}, {}]}
+2021-02-21 20:51:17.853  INFO 34536 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : Result : index
+2021-02-21 20:51:17.854  INFO 34536 --- [http-nio-8080-exec-1] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:51:54.089  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.index', args = [{}, {}]}
+2021-02-21 20:51:54.089  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : Result : index
+2021-02-21 20:51:54.089  INFO 34536 --- [http-nio-8080-exec-8] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:51:56.865  INFO 34536 --- [http-nio-8080-exec-6] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:51:56.867 DEBUG 34536 --- [http-nio-8080-exec-6] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:51:56.868 DEBUG 34536 --- [http-nio-8080-exec-6] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:51:56.872 DEBUG 34536 --- [http-nio-8080-exec-6] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:51:56.873  INFO 34536 --- [http-nio-8080-exec-6] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:51:56.873  INFO 34536 --- [http-nio-8080-exec-6] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:51:56.874  INFO 34536 --- [http-nio-8080-exec-6] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
+2021-02-21 20:52:55.599  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : Request : {url = http://localhost:8080/common', ip = 0:0:0:0:0:0:0:1', classMethod = com.chilly.examlibrary.controller.IndexController.common', args = [{}, {}]}
+2021-02-21 20:52:55.600 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.mapper.UserBookMapper.listBook     : ==>  Preparing: select b.book_id,b.book_title,b.book_classify_id,c.classify_name from book b,classify c where b.book_classify_id = c.classify_id
+2021-02-21 20:52:55.601 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.mapper.UserBookMapper.listBook     : ==> Parameters: 
+2021-02-21 20:52:55.613 DEBUG 34536 --- [http-nio-8080-exec-3] c.c.e.mapper.UserBookMapper.listBook     : <==      Total: 29
+2021-02-21 20:52:55.613  INFO 34536 --- [http-nio-8080-exec-3] c.c.e.service.Impl.UserBookServiceImpl   : classify: 
+2021-02-21 20:52:55.613  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : Result : common
+2021-02-21 20:52:55.613  INFO 34536 --- [http-nio-8080-exec-3] com.chilly.examlibrary.aspect.LogAspect  : ----------------------deAfter------------------------
