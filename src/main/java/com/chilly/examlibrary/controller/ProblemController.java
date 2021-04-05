@@ -1,7 +1,6 @@
 package com.chilly.examlibrary.controller;
 
 import com.chilly.examlibrary.entity.Answer;
-import com.chilly.examlibrary.entity.Book;
 import com.chilly.examlibrary.entity.Problem;
 import com.chilly.examlibrary.entity.query.BookQuery;
 import com.chilly.examlibrary.service.AnswerService;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -58,7 +56,7 @@ public class ProblemController {
         model.addAttribute("book",bookQuery);
         model.addAttribute("problem",problem);
 
-        return "examTeacher";
+        return "common/examTeacher";
     }
 
 
@@ -106,7 +104,7 @@ public class ProblemController {
 
         model.addAttribute("problem_id",problem_id);
 
-        return "studentList";
+        return "common/studentList";
     }
 
     //单个考生详情，用于改卷
@@ -117,7 +115,7 @@ public class ProblemController {
         model.addAttribute("answer_student", answer_student);
         model.addAttribute("problem_content",problem_content);
 
-        return "studentDetails";
+        return "common/studentDetails";
     }
 
     //成绩输入

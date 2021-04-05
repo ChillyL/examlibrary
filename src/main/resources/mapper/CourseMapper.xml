@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.CourseMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="theCourseResult" type="com.chilly.examlibrary.entity.Course">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="course_id" property="course_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="course_title" property="course_title" jdbcType="VARCHAR"/>
+        <result column="course_intro" property="course_intro" jdbcType="VARCHAR"/>
+        <result column="course_author" property="course_author" jdbcType="VARCHAR"/>
+        <result column="course_data" property="course_data" jdbcType="VARCHAR"/>
+        <result column="course_work" property="course_work" jdbcType="VARCHAR"/>
+        <result column="course_createTime" property="course_createTime" javaType="Date" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+
+    <select id="listCourse" resultMap="theCourseResult">
+        select *
+        from course
+    </select>
+
+
+</mapper>

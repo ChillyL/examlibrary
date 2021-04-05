@@ -26,10 +26,10 @@
 <!--  <link rel="stylesheet" type="text/css" href="../static/dist/components/sidebar.css">-->
 <!--  <link rel="stylesheet" type="text/css" href="../static/dist/components/transition.css">-->
 
-  <link rel="stylesheet" type="text/css" href="../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+  <link rel="stylesheet" type="text/css" href="../../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
 
   <!--引入目录自动生成器（根据id生成）-->
-  <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}"/>
+  <link rel="stylesheet" href="../../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}"/>
 
   <style type="text/css" th:inline="text">
 
@@ -132,11 +132,11 @@
     }
   </style>
 
-  <script src="../static/assets/library/jquery.min.js" th:src="@{/assets/library/jquery.min.js}"></script>
-  <script src="../static/dist/components/visibility.js" th:src="@{/dist/components/visibility.js}"></script>
-  <script src="../static/dist/components/sidebar.js" th:src="@{/dist/components/sidebar.js}"></script>
-  <script src="../static/dist/components/transition.js" th:src="@{/dist/components/transition.js}"></script>
-  <script src="../static/assets/library/iframe-content.js" th:src="@{/assets/library/iframe-content.js}"></script>
+  <script src="../../static/assets/library/jquery.min.js" th:src="@{/assets/library/jquery.min.js}"></script>
+  <script src="../../static/dist/components/visibility.js" th:src="@{/dist/components/visibility.js}"></script>
+  <script src="../../static/dist/components/sidebar.js" th:src="@{/dist/components/sidebar.js}"></script>
+  <script src="../../static/dist/components/transition.js" th:src="@{/dist/components/transition.js}"></script>
+  <script src="../../static/assets/library/iframe-content.js" th:src="@{/assets/library/iframe-content.js}"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
@@ -238,7 +238,7 @@
         <a class="active item" th:href="@{/}">首页</a>
 
         <div class="right item">
-          <a class="ui button" href="login.html" th:unless="${session.teacher} or ${session.student}" th:href="@{/user}">登录</a>
+          <a class="ui button" href="../login.html" th:unless="${session.teacher} or ${session.student}" th:href="@{/user}">登录</a>
 
           <div class="ui dropdown item" th:if="${session.teacher} or ${session.student}">
             <div class="ui labeled basic icon">
@@ -290,8 +290,8 @@
 
       <div class="ui card" style="width: 100%!important;">
         <div class="content" th:each="book : ${bookList.value}">
-          <a href="articles.html" style="color: #b98286" th:text="${book.book_title}"
-          th:href="@{/book/{book_id}(book_id=${book.book_id})}">第3、4讲 语录与语类文献</a>
+          <a href="../common/articles.html" style="color: #b98286" th:text="${book.book_title}"
+             th:href="@{/book/{book_id}(book_id=${book.book_id})}">第3、4讲 语录与语类文献</a>
         </div>
       </div>
 
@@ -316,7 +316,7 @@
 
 
 <!--引入目录自动生成器（根据id生成）-->
-<script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+<script src="../../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
 <script>
 
   $('.ui.dropdown').dropdown({

@@ -31,7 +31,7 @@ public class CommentController {
         List<Comment> comments = commentService.listCommentByBookId(bookId);
         System.out.println(comments);
         model.addAttribute("comments", comments);
-        return "articles :: commentList";
+        return "common/articles :: commentList";
     }
 
     //    新增评论
@@ -52,7 +52,7 @@ public class CommentController {
         commentService.saveComment(comment);
         List<Comment> comments = commentService.listCommentByBookId(bookId);
         model.addAttribute("comments", comments);
-        return "articles :: commentList";
+        return "common/articles :: commentList";
     }
 
     //    删除评论

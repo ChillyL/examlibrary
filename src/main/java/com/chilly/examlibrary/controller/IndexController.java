@@ -4,9 +4,6 @@ import com.chilly.examlibrary.entity.Book;
 import com.chilly.examlibrary.entity.query.BookQuery;
 import com.chilly.examlibrary.service.UserBookService;
 import com.chilly.examlibrary.util.UploadUtil;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +39,7 @@ public class IndexController {
 
         model.addAttribute("listHashMap", listHashMap);
 
-        return "common";
+        return "common/common";
     }
 
     @GetMapping("/book/{book_id}")
@@ -52,7 +49,7 @@ public class IndexController {
 
         model.addAttribute("book",book);
 
-        return "articles";
+        return "common/articles";
     }
 
     /**

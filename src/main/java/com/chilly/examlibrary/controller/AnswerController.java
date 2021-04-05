@@ -56,7 +56,7 @@ public class AnswerController {
         model.addAttribute("problem",problem);
         model.addAttribute("answer",answer);
 
-        return "examStudent";
+        return "common/examStudent";
     }
 
 
