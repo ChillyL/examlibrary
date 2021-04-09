@@ -170,15 +170,6 @@
           })
       ;
 
-      $('.overlay').visibility({
-          type: 'fixed',
-          offset: 80
-      });
-
-      // create sidebar and attach to menu open
-      // $('.ui.sidebar')
-      //   .sidebar('attach events', '.toc.item')
-      // ;
 
     })
   ;
@@ -273,27 +264,20 @@
   <!--</div>-->
 
   <div class="ui vertical stripe segment js-toc-content">
-    <!--生成目录-->
-    <div class="overlay">
 
-      <div class="ui labeled icon vertical basic menu toc-container" style="background-color: #cdcdd0;">
-        <p>分类目录</p>
-        <ol class="js-toc">
+    <div class="ui text container center aligned">
 
-        </ol>
-      </div>
-    </div>
-    <div class="ui text container center aligned" th:each="bookList,index : ${listHashMap}">
-      <h4 class="ui horizontal header divider" th:id="toc_+(${bookList.key})" th:text="${bookList.key}">
-        语录
-      </h4>
-
-      <div class="ui card" style="width: 100%!important;">
-        <div class="content" th:each="book : ${bookList.value}">
-          <a href="../common/articles.html" style="color: #b98286" th:text="${book.book_title}"
-             th:href="@{/book/{book_id}(book_id=${book.book_id})}">第3、4讲 语录与语类文献</a>
+      <div class="ui card" style="width: 100%!important;" th:each="course : ${courseList}">
+        <div class="content">
+          <a href="#" style="color: #b98286" th:text="${course.course_title}"
+             th:href="@{/book}"><h3>第3、4讲 语录与语类文献</h3></a>
         </div>
+
+        <h4 class="ui horizontal header divider"  th:text="${#dates.format(course.course_createTime,'yyyy-MM-dd HH:mm')}">
+          2021-04-08
+        </h4>
       </div>
+
 
     </div>
 
@@ -321,28 +305,6 @@
 
   $('.ui.dropdown').dropdown({
     on: 'hover'
-  });
-
-  //初始化目录显示
-  tocbot.init({
-      // Where to render the table of contents.
-      // 在何处呈现目录。
-      tocSelector: '.js-toc',
-      // Where to grab the headings to build the table of contents.
-      // 在哪里获取标题以建立目录。
-      contentSelector: '.js-toc-content',
-      // Which headings to grab inside of the contentSelector element.
-      // 要在contentSelector元素内抓取的标题。
-      headingSelector: 'h4',
-      // For headings inside relative or absolute positioned containers within content.
-      // 用于在内容中相对或绝对定位的容器内的标题。
-      hasInnerContainers:true,
-      //启用平滑滚动。
-      scrollSmooth:true,
-      //平滑滚动持续时间。
-      scrollSmoothDuration:420,
-      //scrollSmoothOffset: -80,
-      headingsOffset: -50
   });
 </script>
 </body>

@@ -27,6 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new UserLoginInterceptor())
                 .addPathPatterns("/book/**")   //定义需要拦截的路径
                 .addPathPatterns("/common/**")
+                .addPathPatterns("/course/**")
                 .excludePathPatterns("/user")  //排除部分必须执行的
                 .excludePathPatterns("/");
     }

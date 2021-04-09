@@ -1,4 +1,4 @@
-package com.chilly.examlibrary.controller;
+package com.chilly.examlibrary.controller.common;
 
 import com.chilly.examlibrary.entity.Answer;
 import com.chilly.examlibrary.entity.Problem;
