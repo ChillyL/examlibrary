@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.AdminCourseMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+<!--    <resultMap id="theCourseResult" type="com.chilly.examlibrary.entity.Course">-->
+<!--        &lt;!&ndash;id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) &ndash;&gt;-->
+<!--        <id column="course_id" property="course_id" javaType="Long" jdbcType="BIGINT"/>-->
+<!--        &lt;!&ndash;result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"&ndash;&gt;-->
+<!--        <result column="course_title" property="course_title" jdbcType="VARCHAR"/>-->
+<!--        <result column="course_intro" property="course_intro" jdbcType="VARCHAR"/>-->
+<!--        <result column="course_author" property="course_author" jdbcType="VARCHAR"/>-->
+<!--        <result column="course_data" property="course_data" jdbcType="VARCHAR"/>-->
+<!--        <result column="course_work" property="course_work" jdbcType="VARCHAR"/>-->
+<!--        <result column="course_createTime" property="course_createTime" javaType="Date" jdbcType="TIMESTAMP"/>-->
+
+<!--    </resultMap>-->
+
+    <select id="listCourse" resultMap="com.chilly.examlibrary.mapper.CourseMapper.theCourseResult">
+        select *
+        from course
+    </select>
+
+    <insert id="saveCourse" parameterType="com.chilly.examlibrary.entity.Course">
+        insert into course
+        (course_title,course_intro,course_author,course_createTime,course_data,course_work)
+        values (#{course_title},#{course_intro},#{course_author},#{course_createTime},#{course_data},#{course_work})
+    </insert>
+
+    <update id="updateCourse" parameterType="com.chilly.examlibrary.entity.Course">
+        update course set course_title =#{course_title},course_intro =#{course_intro},course_author =#{course_author},
+                          course_createTime =#{course_createTime},course_data =#{course_data},course_work =#{course_work}
+        where course_id ={course_id}
+    </update>
+
+</mapper>
