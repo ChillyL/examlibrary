@@ -50,8 +50,8 @@
 <div class="ui attached pointing menu m-shadow-small">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" th:href="@{/admin/book/input}" class="item">添加</a>
-            <a href="#" th:href="@{/admin/book}" class="active item">列表</a>
+            <a href="#" th:href="@{/admin/course/input}" class="item">添加</a>
+            <a href="#" th:href="@{/admin/course}" class="active item">列表</a>
         </div>
     </div>
 
@@ -77,7 +77,7 @@
             <div class="inline fields">
 
                 <div class="field">
-                    <input type="text" name="book_title" th:value="*{book_title}" placeholder="书名">
+                    <input type="text" name="course_title" th:value="*{course_title}" placeholder="课程名">
                 </div>
 
 
@@ -91,7 +91,7 @@
         <!--            </form>-->
 
         <div class="ui segment basic" id="table-container">
-            <table th:fragment="bookList" class="ui celled table">
+            <table th:fragment="courseList" class="ui celled table">
                 <thead>
                 <tr align="center">
                     <th>序号</th>
@@ -191,6 +191,18 @@
         });
     }
 
+</script>
+
+<script>
+    // 关闭消息提示
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        })
+    ;
 </script>
 </body>
 </html>

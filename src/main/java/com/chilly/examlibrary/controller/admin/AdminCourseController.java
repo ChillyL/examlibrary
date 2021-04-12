@@ -1,7 +1,5 @@
 package com.chilly.examlibrary.controller.admin;
 
-import com.chilly.examlibrary.entity.Book;
-import com.chilly.examlibrary.entity.Classify;
 import com.chilly.examlibrary.entity.Course;
 import com.chilly.examlibrary.service.AdminCourseService;
 import com.github.pagehelper.PageHelper;
@@ -11,10 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -46,5 +47,98 @@ public class AdminCourseController {
         model.addAttribute("pageInfo", pageInfo);
 
         return "admin/course";
+    }
+
+    //跳转新增页面
+    @GetMapping("/course/input")
+    public String input(Model model) {
+
+
+        model.addAttribute("course", new Course());
+
+        return "admin/courseAdd";
+    }
+
+    @PostMapping("/course")
+    public String post(@RequestParam("file") MultipartFile file, Course course, RedirectAttributes redirectAttributes) throws IOException {
+
+//        Course course1 = adminCourseService.getCourseByTitle(course.getCourse_title());
+//        if (course1 != null) {
+//            redirectAttributes.addFlashAttribute("message", "不能添加重复的书籍");
+//            return "redirect:/admin/course/input";
+//        }
+
+        try {
+            // Get the file and save it somewhere
+            file.transferTo(new File("F:/coursefile",file.getOriginalFilename()));
+
+            //资料地址
+            course.setCourse_data("F:/coursefile/" + file.getOriginalFilename());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        logger.info("course:",course);
+
+        //保存
+        int courseId = adminCourseService.saveCourse(course);
+
+        if (courseId == 0) {
+            redirectAttributes.addFlashAttribute("message", "新增失败");
+        } else {
+            redirectAttributes.addFlashAttribute("message", "新增成功");
+        }
+
+        return "redirect:/admin/course";
+    }
+
+    //编辑修改
+    @GetMapping("/course/{course_id}/input")
+    public String editPost(@PathVariable Long course_id, Model model) {
+        Course course = adminCourseService.getCourse(course_id);
+
+        model.addAttribute("course",course);
+
+        return "admin/courseAdd";
+    }
+
+    //编辑修改文章
+    @PostMapping("/course/{course_id}")
+    public String editPost(@Valid Course course, @RequestParam("file") MultipartFile file, @PathVariable Long course_id , RedirectAttributes attributes) {
+
+        //获取之前的书籍相关文件地址
+        String previousData = adminCourseService.getCourse(course_id).getCourse_data();
+
+        //判断文件是否更改
+        if (("F:/coursefile/" + file.getOriginalFilename()).equals(previousData) || previousData == null){
+            course.setCourse_data(previousData);   //一样则不用再次上传
+        }else {
+
+            File file2 = new File(previousData);//根据指定的文件名创建File对象
+            file2.delete();  //删掉之前的
+
+            try {
+                // Get the file and save it somewhere
+                file.transferTo(new File("F:/coursefile",file.getOriginalFilename()));
+
+                //资料地址
+                course.setCourse_data("F:/coursefile/" + file.getOriginalFilename());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                course.setCourse_data("");  //出问题就给个空
+            }
+        }
+
+        int i = adminCourseService.updateCourse(course);
+
+        if (i == 1) {
+            attributes.addFlashAttribute("message", "修改成功");
+        } else {
+            attributes.addFlashAttribute("message", "修改失败");
+        }
+
+        return "redirect:/admin/course";
     }
 }

@@ -1,5 +1,6 @@
 package com.chilly.examlibrary.service;
 
+import com.chilly.examlibrary.entity.Book;
 import com.chilly.examlibrary.entity.Course;
 
 import java.util.List;
@@ -25,4 +26,18 @@ public interface AdminCourseService {
      * @return
      */
     int updateCourse(Course course);
+
+    /**
+     * 课程名，查
+     * @param course_title
+     * @return
+     */
+    List<Course> getCourseByTitle(String course_title);
+
+    /**
+     * id查
+     * @param course_id
+     * @return
+     */
+    Course getCourse(Long course_id);
 }

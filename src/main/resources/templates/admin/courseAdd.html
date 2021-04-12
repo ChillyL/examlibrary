@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:white-space="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端适应-->
+    <meta name="viewport" content="width=device-width , inital-scale=1.0">
+    <title>新增书籍</title>
+
+
+    <link rel="stylesheet" type="text/css" href="../../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
+    <link rel="stylesheet" href="../../static/css/me.css">
+
+</head>
+<body>
+
+<!--导航-->
+<!--inverted:反转.会变成黑色-->
+<nav th:replace="admin/_fragments :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <!--stackable 适应移动端-->
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item" style="font-family: STSong">管理系统</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="user icon"></i>教师管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="user outline icon"></i>学生管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类管理</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>书籍管理</a>
+            <a href="#" class="m-item item m-mobile-hide active"><i class="tasks icon"></i>课程管理</a>
+
+            <!--头像-->
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="https://picsum.photos/id/1/100/100" alt="" class="ui avatar image">管理员
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--移动端的列表按钮  toggle black无显示意义，只用于类似id作用-->
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--二级导航-->
+<div class="ui attached pointing menu m-shadow-small">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/course/input}" class="item active">添加</a>
+            <a href="#" th:href="@{/admin/course}" class="item">列表</a>
+        </div>
+    </div>
+
+</div>
+
+<!--中间内容-->
+<div class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+
+        <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+            <i class="close icon"></i>
+            <div class="header">提示：</div>
+            <p th:text="${message}">恭喜，操作成功！</p>
+        </div>
+
+        <form action="#" th:object="${course}" th:action="*{course_id}==null ? @{/admin/course} : @{/admin/course/{course_id}(course_id=*{course_id})}"
+              method="post" enctype="multipart/form-data" class="ui form">
+
+            <input type="hidden" name="course_id" th:value="*{course_id}">
+
+            <div class="field">
+
+                <div id="exam1">
+                    <div class="ui top attached segment basic">
+                        <div class="ui middle aligned column grid">
+                            <div class="column center aligned">
+                                <h4 class="ui header">
+                                    <span th:text="*{course_id}==null ? '新增课程' : '修改课程'">新增课程</span>
+                                </h4>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui teal attached segment">
+                        <!--内容-->
+                        <div class="ui middle aligned mobile reversed stackable grid">
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+                                    <label class="ui teal basic label">课程名</label>
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <input type="text" name="course_title" th:value="*{course_title}!=null ? *{course_title}" placeholder="课程名">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+                                    <label class="ui teal basic label">课程老师</label>
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <input type="text" name="course_author" th:value="*{course_author}!=null ? *{course_author}" placeholder="课程老师">
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+                                    <label class="ui teal basic label">课程简介</label>
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <textarea name="course_intro" placeholder="题目描述...（1000字内）" white-space:pre-warp maxlength="1000" th:text="*{course_intro}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+                                    <label class="ui teal basic label">课程作业</label>
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <input type="hidden" name="course_work">
+                                    <div id="course_work_editor" th:utext="*{course_work}">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+                                    <label class="ui teal basic label">相关资料</label>
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <div class="ui right aligned container">
+                                        <input type="file" name="file" class="ui basic button"/>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <!--密码提示-->
+                                    <div class="ui mini orange message">导入的相关资料需要是压缩包形式</div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--底部-->
+                <div class="ui bottom teal attached segment">
+                    <div class="ui middle aligned one column grid">
+                        <div class="center aligned column">
+                            <button type="ui secondary button" class="ui button" onclick="window.history.go(-1)">取消</button>
+                            <button id="btn" class="ui teal button">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="ui error message"></div>
+
+
+        </form>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<!--CDN版本,不需要下载-->
+<!--连接jsdeliver-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--链接semantic UI-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+<!-- 使用wangEditor富文档，注意，只需要引用 JS，无需引用任何 CSS ！！！-->
+<script type="text/javascript" src="../../static/js/wangEditor.min.js" th:src="@{/js/wangEditor.min.js}"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var course_work = new E('#course_work_editor')
+    // 或者 var editor = new E( document.getElementById('editor') )
+    course_work.create()
+
+    document.getElementById('btn').addEventListener('click', function () {
+        // 读取 html
+        // alert(content_editor.txt.html())
+        // alert(answer_editor.txt.html())
+
+        //赋值
+        $('[name="course_work"]').val(course_work.txt.html());
+
+
+    }, false)
+
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+
+
+
+    $('.ui.form').form({
+        fields: {
+            course_title: {
+                identifier: 'course_title',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入书名'
+                }]
+            },
+            course_intro: {
+                identifier: 'course_intro',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入书籍简介'
+                }]
+            },
+            course_author: {
+                identifier: 'course_author',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入该课程的老师'
+                }]
+            },
+            course_data: {
+                identifier: 'course_data',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请导入课程相关资料'
+                }]
+            },
+            course_work: {
+                identifier: 'course_work',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请导入课程相关作业'
+                }]
+            },
+        }
+    });
+</script>
+
+</body>
+</html>

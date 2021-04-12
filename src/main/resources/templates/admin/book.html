@@ -209,5 +209,17 @@
     }
 
 </script>
+
+<script>
+    // 关闭消息提示
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        })
+    ;
+</script>
 </body>
 </html>

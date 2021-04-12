@@ -29,7 +29,25 @@
     <update id="updateCourse" parameterType="com.chilly.examlibrary.entity.Course">
         update course set course_title =#{course_title},course_intro =#{course_intro},course_author =#{course_author},
                           course_createTime =#{course_createTime},course_data =#{course_data},course_work =#{course_work}
-        where course_id ={course_id}
+        where course_id =#{course_id}
     </update>
+
+    <select id="listCourseByTitle" resultMap="com.chilly.examlibrary.mapper.CourseMapper.theCourseResult" parameterType="string">
+
+        <bind name="pattern" value="'%' + course_title + '%'"/>
+        select course_id,course_title,course_intro,course_author,course_createTime,course_data,course_work
+        from course
+        <where>
+            <if test="course_title != null and course_title != ''">
+                and course_title like #{pattern}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCourse" resultMap="com.chilly.examlibrary.mapper.CourseMapper.theCourseResult" parameterType="long">
+        select course_id,course_title,course_intro,course_author,course_createTime,course_data,course_work
+        from course
+        where course_id=#{course_id}
+    </select>
 
 </mapper>

@@ -1,6 +1,5 @@
 package com.chilly.examlibrary.mapper;
 
-import com.chilly.examlibrary.entity.Book;
 import com.chilly.examlibrary.entity.Course;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -33,4 +32,18 @@ public interface AdminCourseMapper {
      * @return
      */
     int updateCourse(Course course);
+
+    /**
+     * 模糊查询
+     * @param course_title
+     * @return
+     */
+    List<Course> listCourseByTitle(String course_title);
+
+    /**
+     * id查
+     * @param course_id
+     * @return
+     */
+    Course getCourse(Long course_id);
 }
