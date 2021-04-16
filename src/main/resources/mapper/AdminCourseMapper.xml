@@ -50,4 +50,9 @@
         where course_id=#{course_id}
     </select>
 
+    <delete id="deleteCourse" parameterType="long">
+        delete from course
+        where course_id =#{course_id}
+    </delete>
+
 </mapper>

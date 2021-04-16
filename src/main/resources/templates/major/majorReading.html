@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
-  <title>专业阅读详情</title>
+  <title>课程详情</title>
 
   <link rel="stylesheet" type="text/css" href="../../static/dist/semantic.css" th:href="@{/dist/semantic.css}">
 
@@ -103,16 +103,16 @@
 <body>
 
 <div class="ui main text container">
-  <h1 class="ui header">第3、4讲 语录与语类文献</h1>
+  <h1 class="ui header" th:text="${course.course_title}">第3、4讲 语录与语类文献</h1>
 </div>
 
 
 <div class="ui borderless main menu">
   <div class="ui text container">
     <div class="header item">
-      <a href="#">返回首页</a>
+      <a href="#" th:href="@{/course}">返回首页</a>
     </div>
-    <a href="#" class="active item">课程内容</a>
+    <a href="#" class="active item" th:href="@{/course/{course_id}(course_id=${course.course_id})}">课程内容</a>
     <a href="#" class="item">阅读与写作</a>
 <!--    <a href="#" class="ui right floated dropdown item">-->
 <!--      Dropdown <i class="dropdown icon"></i>-->
@@ -136,15 +136,21 @@
 </div>
 
 <div class="ui text container">
-  <p>这里是一段简介</p>
 
   <div class="overlay">
     <div class="ui labeled icon vertical menu">
-      <a class="item"><i class="mail icon"></i>课程资料下载</a>
+      <a class="item" th:if="${course.course_data} == null"><i class="mail icon"></i>无相关资料</a>
+
+      <form class="form-signin" th:action="@{/course/download?(course_data=${course.course_data})}" method="post" th:if="${course.course_data} != null">
+        <a class="item submit"><i class="mail icon"></i><button class="ui basic submit button">课程资料下载</button></a>
+
+        <p style="color: red" th:text="${result}" th:if="${not #strings.isEmpty(result)}"></p>
+      </form>
+<!--      <a class="item"><i class="mail icon"></i>课程资料下载</a>-->
     </div>
   </div>
 
-  <p>以往我们学习散文，是在文学史的视角下，一般分为历史散文和哲学散文，从语言、人物形象、艺术风格进行传授。写作课，大多是应用写作的实训。这两种观照角度对于修饰语言的方法以及其中所藏的深刻的睿智尚未论及。
+  <p th:text="${course.course_intro}">以往我们学习散文，是在文学史的视角下，一般分为历史散文和哲学散文，从语言、人物形象、艺术风格进行传授。写作课，大多是应用写作的实训。这两种观照角度对于修饰语言的方法以及其中所藏的深刻的睿智尚未论及。
     思想参与下的修辞训练：观赏不如亲近，亲近不如使用，“语言艺术必须通过使用才能激活，赋予我们信念与前行的力量。”“人类把握世界的三种方式---认知、评价、审美”，我们要遵从这种方式来激发学生。使学生在文体的学习中，参与到思想基本哲理的表达，然后知道语言艺术的美妙。
     思想参与下的文体写作：它的价值在于思想的延展和文体的流变相伴而生。这种视角重视文体的“义理范畴”。同时，也体现了中国文体成熟的独特路径。我们将文体学引进文学史，基于这样一个学术理念：话语体式和一个学派内在的肌理是相连的。文体形态是人类感受世界、把握世界、阐释世界的方式之一，它们是历史的产物，积淀着深厚的文化内蕴。当特定的文体形态与群体的感受方式和时代精神相对应时，才得到普遍的接受。我们重新思考一些我们过去习之为常的事情。从而获得一种深广的语言与文化内涵。这是我们今天想要培养的新的智力主体。
   </p>
@@ -152,12 +158,15 @@
   <br>
   <br>
   <br>
+  <br>
+  <br>
+
 
   <h4 class="ui horizontal header divider" style="margin: 0em 0em 3em">
     课内实训
   </h4>
 
-  <p class="m-text-thin" th:utext="${problem.problem_content}">
+  <p class="m-text-thin" th:utext="${course.course_work}">
     1、观后感<br>
     2、明朝<br>
   </p>
@@ -196,7 +205,7 @@
                  th:attr="data-commentid=${comment.comment_id},data-commentnickname=${comment.comment_user_name}"
                  onclick="reply(this)">回复</a>
               <a class="delete" href="#"
-                 th:href="@{/comment/{param1}/{param2}/delete(param1=${comment.comment_book_id},param2=${comment.comment_id})}"
+                 th:href="@{/comment/{param1}/{param2}/delete(param1=${comment.comment_course_id},param2=${comment.comment_id})}"
                  onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.teacher}">删除</a>
             </div>
           </div>
@@ -226,7 +235,7 @@
                      th:attr="data-commentid=${reply.comment_id},data-commentnickname=${reply.comment_user_name}"
                      onclick="reply(this)">回复</a>
                   <a class="delete" href="#"
-                     th:href="@{/comment/{param1}/{param2}/delete(param1=${reply.comment_book_id},param2=${reply.comment_id})}"
+                     th:href="@{/comment/{param1}/{param2}/delete(param1=${reply.comment_course_id},param2=${reply.comment_id})}"
                      onclick="alert('确定要删除该评论吗？三思啊! 删了可就没了！')"
                      th:if="${session.user}">删除</a>
                   <!--<a class="delete" href="#" th:href="@{/comment/{id}/delete(id=${reply.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>-->
@@ -244,7 +253,7 @@
   </div>
 
   <div id="comment-form" class="ui form">
-    <input type="hidden" name="bookId" th:value="${book.book_id}">
+    <input type="hidden" name="courseId" th:value="${course.course_id}">
     <input type="hidden" name="parentComment.comment_id" value="-1">
     <input type="hidden" name="name" th:value="${session.teacher}? ${session.teacher.teacher_name}: ${session.student.student_name}">
     <input type="hidden" name="number" th:value="${session.teacher}? ${session.teacher.teacher_number}: ${session.student.student_number}">

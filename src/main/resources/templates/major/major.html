@@ -270,7 +270,7 @@
       <div class="ui card" style="width: 100%!important;" th:each="course : ${courseList}">
         <div class="content">
           <a href="#" style="color: #b98286" th:text="${course.course_title}"
-             th:href="@{/book}"><h3>第3、4讲 语录与语类文献</h3></a>
+             th:href="@{/course/{course_id}(course_id=${course.course_id})}"><h3>第3、4讲 语录与语类文献</h3></a>
         </div>
 
         <h4 class="ui horizontal header divider"  th:text="${#dates.format(course.course_createTime,'yyyy-MM-dd HH:mm')}">

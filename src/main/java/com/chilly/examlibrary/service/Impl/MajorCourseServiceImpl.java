@@ -18,4 +18,12 @@ public class MajorCourseServiceImpl implements MajorCourseService {
     public List<Course> listCourse() {
         return courseMapper.listCourse();
     }
+
+    @Override
+    public Course getCourseById(Long course_id) {
+
+        Course course = courseMapper.getCourseById(course_id);
+
+        return course;
+    }
 }

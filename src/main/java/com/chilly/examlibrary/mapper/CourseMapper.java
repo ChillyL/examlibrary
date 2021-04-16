@@ -18,4 +18,11 @@ public interface CourseMapper {
      * @return
      */
     List<Course> listCourse();
+
+    /**
+     * id查
+     * @param course_id
+     * @return
+     */
+    Course getCourseById(Long course_id);
 }

@@ -16,9 +16,14 @@
     </resultMap>
 
     <select id="listCourse" resultMap="theCourseResult">
-        select *
+        select course_id,course_title,course_intro,course_author,course_createTime,course_data,course_work
         from course
     </select>
 
+    <select id="getCourseById" resultMap="theCourseResult">
+        select course_id,course_title,course_intro,course_author,course_createTime,course_data,course_work
+        from course
+        where course_id =#{course_id}
+    </select>
 
 </mapper>

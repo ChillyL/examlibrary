@@ -46,4 +46,11 @@ public interface AdminCourseMapper {
      * @return
      */
     Course getCourse(Long course_id);
+
+    /**
+     * id删
+     * @param course_id
+     * @return
+     */
+    int deleteCourse(Long course_id);
 }

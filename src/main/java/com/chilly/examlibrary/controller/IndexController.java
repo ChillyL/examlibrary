@@ -23,54 +23,10 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    @Autowired
-    private UserBookService userBookService;
-
     @GetMapping("/")
     public String index(Model model, RedirectAttributes attributes) {
 
         return "index";
-    }
-
-    @GetMapping("/common")
-    public String common(Model model, RedirectAttributes attributes) {
-
-        HashMap<String, List<BookQuery>> listHashMap = userBookService.listBook();
-
-        model.addAttribute("listHashMap", listHashMap);
-
-        return "common/common";
-    }
-
-    @GetMapping("/book/{book_id}")
-    public String book(@PathVariable Long book_id,Model model){
-
-        Book book = userBookService.getBook(book_id);
-
-        model.addAttribute("book",book);
-
-        return "common/articles";
-    }
-
-    /**
-     * 	文件下载
-     * @param response
-     * @param book_data
-     * @return
-     */
-    @RequestMapping("/book/download")
-    @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-    public String down(HttpServletResponse response,String book_data) {
-        try {
-
-            //根据文件路径下载文件信息
-            UploadUtil.down(response, book_data);
-
-            return "下载成功";
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "下载失败";
     }
 
 

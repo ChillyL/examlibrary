@@ -1,5 +1,6 @@
 package com.chilly.examlibrary.controller.admin;
 
+import com.chilly.examlibrary.entity.Book;
 import com.chilly.examlibrary.entity.Course;
 import com.chilly.examlibrary.service.AdminCourseService;
 import com.github.pagehelper.PageHelper;
@@ -140,5 +141,36 @@ public class AdminCourseController {
         }
 
         return "redirect:/admin/course";
+    }
+
+    //删除
+    @GetMapping("/course/{course_id}/delete")
+    public String delete(@PathVariable Long course_id, RedirectAttributes attributes) {
+        int i = adminCourseService.deleteCourse(course_id);
+        if (i == 1) {
+            attributes.addFlashAttribute("message", "删除成功");
+        } else {
+            attributes.addFlashAttribute("message", "删除失败");
+        }
+
+        return "redirect:/admin/course";
+    }
+
+    @PostMapping("/course/search")
+    public String sreach(String course_title, Model model,
+                         @RequestParam(defaultValue = "1", value = "pageNum") Integer pageNum) {
+
+        PageHelper.startPage(pageNum, 10);
+
+        logger.info("获取到的courseTitle: {}", course_title);
+
+        List<Course> courses = adminCourseService.getCourseByTitle(course_title);
+
+        PageInfo<Course> pageInfo = new PageInfo<Course>(courses);
+        model.addAttribute("pageInfo", pageInfo);
+
+        //动态局部刷新
+        //返回到admin/course.html中的blogList片段,即  th:fragment="blogList" 所在
+        return "admin/course :: courseList";
     }
 }

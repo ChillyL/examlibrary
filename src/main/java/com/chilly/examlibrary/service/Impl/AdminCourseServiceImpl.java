@@ -41,4 +41,9 @@ public class AdminCourseServiceImpl implements AdminCourseService {
     public Course getCourse(Long course_id) {
         return adminCourseMapper.getCourse(course_id);
     }
+
+    @Override
+    public int deleteCourse(Long course_id) {
+        return adminCourseMapper.deleteCourse(course_id);
+    }
 }
