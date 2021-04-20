@@ -85,7 +85,7 @@
   <div class="ui borderless main menu"  style="background-image:url('https://picsum.photos/id/379/2000/500');">
     <div class="ui text container">
       <div class="header item">
-        <a href="" th:href="@{/}"><h3 style="color: #b98286;font-family: STSong;">通识阅读</h3></a>
+        <a href="" th:href="@{/common}"><h3 style="color: #b98286;font-family: STSong;">通识阅读</h3></a>
       </div>
       <a class="item"><h4 th:text="${book.book_title}">《明朝那些事儿》</h4></a>
     </div>
@@ -108,7 +108,7 @@
       2、明朝<br>
     </p>
 
-    <form action="#" th:object="${answer}" th:action="*{answer_id}==null ? @{/book/answer} : @{/book/answer/update}"
+    <form action="#" th:unless="${problem.problem_id == -1}" th:object="${answer}" th:action="*{answer_id}==null ? @{/book/answer} : @{/book/answer/update}"
           method="post" class="ui form">
       <h4 class="ui horizontal header divider" style="margin: 5em 0em 3em">
         答案

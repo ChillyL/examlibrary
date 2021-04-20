@@ -50,7 +50,14 @@ public class AnswerController {
         }
 
         BookQuery bookQuery = userBookService.getBookQuery(bookId);
+
         Problem problem = problemService.getProblemByBookId(bookId);
+
+        if (problem == null){
+            problem = new Problem();
+            problem.setProblem_id((long) -1);
+            problem.setProblem_content("<p>无，需要教师新增思考题。</p>");
+        }
 
         model.addAttribute("book",bookQuery);
         model.addAttribute("problem",problem);
