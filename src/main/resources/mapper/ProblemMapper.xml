@@ -47,4 +47,9 @@
         and problem_id=#{problem_id}
     </select>
 
+    <delete id="deleteProblemByBookId" parameterType="long">
+        delete from problem
+        where problem_book_id =#{bookId}
+    </delete>
+
 </mapper>

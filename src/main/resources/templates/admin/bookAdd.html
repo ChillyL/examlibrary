@@ -94,7 +94,7 @@
                             <div class="row">
                                 <!--前-->
                                 <div class="two wide column center aligned">
-                                    <label class="ui teal basic label">书名</label>
+                                    <label class="ui teal basic label">书的名字</label>
                                 </div>
                                 <!--内容-->
                                 <div class="fourteen wide column">
@@ -105,7 +105,18 @@
                             <div class="row">
                                 <!--前-->
                                 <div class="two wide column center aligned">
-                                    <label class="ui teal basic label">作者</label>
+                                    <label class="ui teal basic label">书籍封面url</label>
+                                </div>
+                                <!--内容-->
+                                <div class="fourteen wide column">
+                                    <input type="text" name="book_img" th:value="*{book_img}!=null ? *{book_img}" placeholder="书籍封面url,无可不填">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--前-->
+                                <div class="two wide column center aligned">
+                                    <label class="ui teal basic label">作者名字</label>
                                 </div>
                                 <!--内容-->
                                 <div class="fourteen wide column">
@@ -116,7 +127,7 @@
                             <div class="row">
                                 <!--前-->
                                 <div class="two wide column center aligned">
-                                    <label class="ui teal basic label">出版社</label>
+                                    <label class="ui teal basic label">其出版社</label>
                                 </div>
                                 <!--内容-->
                                 <div class="fourteen wide column">
@@ -157,7 +168,7 @@
                             <div class="row">
                                 <!--前-->
                             <div class="two wide column center aligned">
-                                    <label class="ui teal basic label">推荐人</label>
+                                    <label class="ui teal basic label">其推荐人</label>
                                 </div>
                                 <!--内容-->
                                 <div class="fourteen wide column">

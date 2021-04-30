@@ -48,4 +48,11 @@ public interface ProblemMapper {
      * @return
      */
     List<Answer> listAnswerStudentIdByProblem(Long problem_id);
+
+    /**
+     * 删
+     * @param bookId
+     * @return
+     */
+    int deleteProblemByBookId(Long bookId);
 }

@@ -10,17 +10,18 @@
         <result column="book_title" property="book_title" javaType="String" jdbcType="VARCHAR"/>
         <result column="book_classify_id" property="book_classify_id" javaType="Long" jdbcType="BIGINT"/>
         <result column="classify_name" property="book_classify_name" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_img" property="book_img" javaType="String" jdbcType="VARCHAR"/>
 
     </resultMap>
 
     <select id="listBook" resultMap="bookQueryResult">
-        select b.book_id,b.book_title,b.book_classify_id,c.classify_name
+        select b.book_id,b.book_title,b.book_classify_id,b.book_img,c.classify_name
         from book b,classify c
         where b.book_classify_id = c.classify_id
     </select>
 
     <select id="getBookQuery" resultMap="bookQueryResult">
-        select b.book_id,b.book_title,b.book_classify_id,c.classify_name
+        select b.book_id,b.book_title,b.book_classify_id,b.book_img, c.classify_name
         from book b,classify c
         where b.book_classify_id = c.classify_id
         and b.book_id = #{book_id}

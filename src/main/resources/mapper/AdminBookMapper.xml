@@ -13,6 +13,7 @@
         <result column="book_createTime" property="book_createTime" javaType="String" jdbcType="VARCHAR"/>
         <result column="book_publisher" property="book_publisher" javaType="String" jdbcType="VARCHAR"/>
         <result column="book_directory" property="book_directory" javaType="String" jdbcType="VARCHAR"/>
+        <result column="book_img" property="book_img" javaType="String" jdbcType="VARCHAR"/>
 
         <result column="book_teacher_id" property="book_teacher_id" javaType="Long" jdbcType="BIGINT"/>
         <result column="book_classify_id" property="book_classify_id" javaType="Long" jdbcType="BIGINT"/>
@@ -30,7 +31,7 @@
 
     <select id="listBook" resultMap="bookResult">
         select b.book_id,b.book_title,b.book_intro,b.book_author,b.book_data,b.book_createTime,
-        b.book_teacher_id,b.book_classify_id,b.book_publisher,b.book_directory,
+        b.book_teacher_id,b.book_classify_id,b.book_publisher,b.book_directory,b.book_img,
         t.teacher_id,t.teacher_name,c.classify_name,c.classify_id
         from book b,teacher t,classify c
         where b.book_teacher_id = t.teacher_id and b.book_classify_id = c.classify_id
@@ -38,7 +39,7 @@
 
     <select id="getBook" resultMap="bookResult" parameterType="long">
         select b.book_id,b.book_title,b.book_intro,b.book_author,b.book_data,b.book_createTime,
-        b.book_teacher_id,b.book_classify_id,b.book_publisher,book_directory,
+        b.book_teacher_id,b.book_classify_id,b.book_publisher,b.book_directory,b.book_img,
         t.teacher_id,t.teacher_name,c.classify_name,c.classify_id
         from book b,teacher t,classify c
         where b.book_teacher_id = t.teacher_id and b.book_classify_id = c.classify_id
@@ -48,7 +49,7 @@
     <select id="listBookByTitleOrClassify" resultMap="bookResult" parameterType="com.chilly.examlibrary.entity.Book">
         <bind name="pattern" value="'%' + book_title + '%'"/>
         select b.book_id,b.book_title,b.book_intro,b.book_author,b.book_data,b.book_createTime,
-        b.book_teacher_id,b.book_classify_id,b.book_publisher,book_directory,
+        b.book_teacher_id,b.book_classify_id,b.book_publisher,b.book_directory,b.book_img,
         t.teacher_id,t.teacher_name,c.classify_name,c.classify_id
         from book b,teacher t,classify c
         <where>
@@ -72,13 +73,13 @@
 
     <insert id="saveBook" parameterType="com.chilly.examlibrary.entity.Book">
         insert into book
-        (book_title,book_intro,book_author,book_data,book_createTime,book_teacher_id,book_classify_id,book_publisher,book_directory)
-        values (#{book_title},#{book_intro},#{book_author},#{book_data},#{book_createTime},#{book_teacher_id},#{book_classify_id},#{book_publisher})
+        (book_title,book_intro,book_author,book_data,book_createTime,book_teacher_id,book_classify_id,book_publisher,book_directory,book_img)
+        values (#{book_title},#{book_intro},#{book_author},#{book_data},#{book_createTime},#{book_teacher_id},#{book_classify_id},#{book_publisher},#{book_directory},#{book_img})
     </insert>
 
     <update id="updateBook" parameterType="com.chilly.examlibrary.entity.Book">
         update book set book_title =#{book_title},book_intro =#{book_intro},book_author =#{book_author},book_data =#{book_data},book_directory =#{book_directory},
-        book_createTime =#{book_createTime},book_teacher_id =#{book_teacher_id},book_classify_id =#{book_classify_id},book_publisher =#{book_publisher}
+        book_createTime =#{book_createTime},book_teacher_id =#{book_teacher_id},book_classify_id =#{book_classify_id},book_publisher =#{book_publisher},book_img =#{book_img}
         where book_id =#{book_id}
     </update>
 

@@ -10,6 +10,15 @@ public class BookQuery {
     private String book_title;    //书名
     private Long book_classify_id;
     private String book_classify_name; //书籍分类
+    private String book_img;   //书籍封面
+
+    public String getBook_img() {
+        return book_img;
+    }
+
+    public void setBook_img(String book_img) {
+        this.book_img = book_img;
+    }
 
     public Long getBook_id() {
         return book_id;

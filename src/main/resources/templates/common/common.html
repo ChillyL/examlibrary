@@ -289,12 +289,25 @@
         历史人文
       </h4>
 
-      <div class="ui card" style="width: 100%!important;">
-        <div class="content" th:each="book : ${bookList.value}">
-          <a href="articles.html" style="color: #b98286" th:text="${book.book_title}"
-             th:href="@{/book/{book_id}(book_id=${book.book_id})}">明朝那些事儿</a>
+      <div class="ui four cards">
+        <div class="card" th:each="book : ${bookList.value}">
+          <div class="image">
+            <img src="https://img9.doubanio.com/view/subject/s/public/s9111416.jpg" th:src="${book.book_img}" style="height: 210px !important;">
+          </div>
+          <div class="extra">
+            <a href="articles.html" style="color: #b98286" th:text="${book.book_title}"
+               th:href="@{/book/{book_id}(book_id=${book.book_id})}">时间简史</a>
+          </div>
         </div>
+
       </div>
+
+<!--      <div class="ui card" style="width: 100%!important;">-->
+<!--        <div class="content" th:each="book : ${bookList.value}">-->
+<!--          <a href="articles.html" style="color: #b98286" th:text="${book.book_title}"-->
+<!--             th:href="@{/book/{book_id}(book_id=${book.book_id})}">明朝那些事儿</a>-->
+<!--        </div>-->
+<!--      </div>-->
 
     </div>
 

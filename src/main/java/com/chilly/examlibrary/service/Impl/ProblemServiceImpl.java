@@ -47,4 +47,9 @@ public class ProblemServiceImpl implements ProblemService {
     public List<Answer> listAnswerStudentIdByProblem(Long problem_id) {
         return problemMapper.listAnswerStudentIdByProblem(problem_id);
     }
+
+    @Override
+    public int deleteProblemByBookId(Long bookId) {
+        return problemMapper.deleteProblemByBookId(bookId);
+    }
 }
