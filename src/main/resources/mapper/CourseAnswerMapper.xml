@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chilly.examlibrary.mapper.CourseAnswerMapper"><!--java的mapper路径-->
+    <!--<resultMap id="唯一的标识"（自己起名字） type="映射的pojo对象"(实体类路径)>-->
+    <resultMap id="theCourseAnswerResult" type="com.chilly.examlibrary.entity.CourseAnswer">
+        <!--id column="表的主键字段，或者可以为查询语句中的别名字段"  property="映射pojo对象的主键属性" jdbcType="字段类型"(VARCHAR)) -->
+        <id column="course_answer_id" property="course_answer_id" javaType="Long" jdbcType="BIGINT"/>
+        <!--result column="表的一个字段（可以为任意表的一个字段）" jdbcType="字段类型" property="映射到pojo对象的一个属性（须为type定义的pojo对象中的一个属性）"-->
+        <result column="course_answer_user_name" property="course_answer_user_name" jdbcType="VARCHAR"/>
+        <result column="course_answer_content" property="course_answer_content" jdbcType="VARCHAR"/>
+        <result column="course_answer_teacher" property="course_answer_teacher" javaType="boolean" jdbcType="TINYINT"/>
+        <result column="course_answer_createTime" property="course_answer_createTime" javaType="Date" jdbcType="TIMESTAMP"/>
+        <result column="course_id" property="course_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="parent_course_answer_id" property="parent_course_answer_id" javaType="Long" jdbcType="BIGINT"/>
+        <result column="answer_sort" property="answer_sort" jdbcType="INTEGER"/>
+
+    </resultMap>
+
+    <insert id="saveCourseAnswer" parameterType="com.chilly.examlibrary.entity.CourseAnswer">
+        insert into course_answer (course_answer_user_name,course_answer_content,course_answer_teacher,
+        course_answer_createTime,course_id,parent_course_answer_id,answer_sort)
+        values (#{course_answer_user_name},#{course_answer_content},#{course_answer_teacher},
+        #{course_answer_createTime},#{course_id},#{parent_course_answer_id},#{answer_sort});
+    </insert>
+
+    <update id="updateCourseAnswerSort" parameterType="com.chilly.examlibrary.entity.CourseAnswer">
+        update course_answer set answer_sort=#{answer_sort}
+        where course_answer_id =#{course_answer_id}
+    </update>
+
+
+    <select id="findByCourseIdParentIdNull" resultMap="theCourseAnswerResult">
+        select *
+        from course_answer c
+        where c.course_id =#{course_id} and isnull(c.parent_course_answer_id)
+        order by  c.answer_sort desc, c.course_answer_createTime desc
+    </select>
+
+    <!--查询一级子评论-->
+    <select id="findByCourseIdParentIdNotNull" resultMap="theCourseAnswerResult">
+        select *
+        from course_answer c
+        where c.course_id =#{course_id} and c.parent_course_answer_id =#{course_answer_id}
+        order by  c.answer_sort desc, c.course_answer_createTime desc
+    </select>
+
+    <!--查询二级子评论-->
+    <select id="findByCourseIdAndReplayId" resultMap="theCourseAnswerResult">
+        select *
+        from course_answer c
+        where c.course_id =#{course_id} and c.parent_course_answer_id =#{childId}
+        order by  c.answer_sort desc, c.course_answer_createTime desc
+    </select>
+
+    <!--<select id="findByParentcourse_answerId" resultType="com.star.entity.course_answer">-->
+    <!--select c.id cid,c.nickname,c.email,c.content,c.avatar,c.create_time,c.blog_id,c.parent_course_answer_id-->
+    <!--from myblog.t_course_answer c-->
+    <!--where c.parent_course_answer_id = #{parentcourse_answerId}-->
+    <!--</select>-->
+
+    <!--删除评论-->
+    <delete id="deleteCourseAnswer">
+        delete from course_answer where course_answer_id =#{course_answer_id}
+    </delete>
+</mapper>

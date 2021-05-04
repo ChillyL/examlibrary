@@ -100,7 +100,7 @@
           <tr>
             <th colspan="3">
               <div class="ui center aligned">
-                <img src="https://img9.doubanio.com/view/subject/s/public/s9111416.jpg" th:src="${book.book_img}" style="height: 210px !important;">
+                <img src="https://picsum.photos/seed/picsum/270/360" th:src="${book.book_img}" style="height: 210px !important;">
               </div>
             </th>
           </tr>
@@ -187,7 +187,7 @@
                                     <span class="date"
                                           th:text="${#dates.format(comment.comment_createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
                 </div>
-                <div class="text" th:text="${comment.comment_content}">
+                <div class="text" th:utext="${comment.comment_content}">
                   How artistic!
                 </div>
                 <div class="actions">

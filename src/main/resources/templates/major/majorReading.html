@@ -178,64 +178,70 @@
   <!--留言区域-->
 
   <div id="comment-container" class="ui segment">
-    <div th:fragment="commentList">
+      <div th:fragment="courseAnswerList">
       <div class="ui threaded comments" style="max-width: 100%;">
 
-        <h3 class="ui dividing header">评论</h3>
-        <div class="comment" th:each="comment : ${comments}">
+        <h3 class="ui dividing header">内容</h3>
+        <div class="comment" th:each="courseAnswer : ${courseAnswers}">
           <a class="avatar">
             <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1010/100/100}">
           </a>
           <div class="content">
             <a class="author">
-              <span th:text="${comment.comment_user_name}">Matt</span>
+              <span th:text="${courseAnswer.course_answer_user_name}">Matt</span>
               <div class="ui mini basic left pointing label m-padded-mini" style="color: #b98286;"
-                   th:if="${comment.comment_teacher}">老师
+                   th:if="${courseAnswer.course_answer_teacher}">老师
               </div>
             </a>
             <div class="metadata">
                                     <span class="date"
-                                          th:text="${#dates.format(comment.comment_createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                          th:text="${#dates.format(courseAnswer.course_answer_createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
             </div>
-            <div class="text" th:text="${comment.comment_content}">
-              How artistic!
+            <div class="text" th:utext="${courseAnswer.course_answer_content}">
+              《中国古代文学史》下1<br>
+              阅读书目：<br>
+              顾学颉选注《元人杂剧选》，人民文学出版社，2007年。<br>
+              思考题：<br>
+              （1）请结合文本，比较《梧桐雨》与《汉宫秋》的异同。<br>
+              （2）请结合《窦娥冤》与《救风尘》，谈谈关汉卿杂剧中女性形象塑造的特色。<br>
             </div>
             <div class="actions">
-              <a class="reply" data-commentid="1" data-commentnickname="Matt"
-                 th:attr="data-commentid=${comment.comment_id},data-commentnickname=${comment.comment_user_name}"
-                 onclick="reply(this)">回复</a>
+              <a class="reply" data-courseAnswerid="1" data-courseAnswernickname="Matt"
+                 th:href="@{/courseAnswer/{param1}/{param2}/top(param1=${courseAnswer.course_id},param2=${courseAnswer.course_answer_id})}"
+                 th:if="${session.teacher}">置顶</a>
+
               <a class="delete" href="#"
-                 th:href="@{/comment/{param1}/{param2}/delete(param1=${comment.comment_course_id},param2=${comment.comment_id})}"
+                 th:href="@{/courseAnswer/{param1}/{param2}/delete(param1=${courseAnswer.course_id},param2=${courseAnswer.course_answer_id})}"
                  onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.teacher}">删除</a>
             </div>
           </div>
           <!--                                子集评论-->
-          <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
-            <div class="comment" th:each="reply : ${comment.replyComments}">
+          <div class="comments" th:if="${#arrays.length(courseAnswer.replyCourseAnswers)}>0">
+            <div class="courseAnswer" th:each="reply : ${courseAnswer.replyCourseAnswers}">
               <a class="avatar">
                 <img src="https://picsum.photos/id/1/100/100" th:src="@{https://picsum.photos/id/1010/100/100}">
               </a>
               <div class="content">
                 <a class="author">
-                  <span th:text="${reply.comment_user_name}">小红</span>
+                  <span th:text="${reply.course_answer_user_name}">小红</span>
                   <div class="ui mini basic left pointing label m-padded-mini" style="color: #b98286;"
-                       th:if="${reply.comment_teacher}">老师
+                       th:if="${reply.course_answer_teacher}">老师
                   </div>
                   &nbsp;<span th:text="|@ ${reply.parentName}|" class="m-teal">@ 小白</span>
                 </a>
                 <div class="metadata">
                                             <span class="date"
-                                                  th:text="${#dates.format(reply.comment_createTime,'yyyy-MM-dd HH:mm')}">Just now</span>
+                                                  th:text="${#dates.format(reply.course_answer_createTime,'yyyy-MM-dd HH:mm')}">Just now</span>
                 </div>
-                <div class="text" th:text="${reply.comment_content}">
+                <div class="text" th:utext="${reply.course_answer_content}">
                   Elliot you are always so right :)
                 </div>
                 <div class="actions">
-                  <a class="reply" data-commentid="1" data-commentnickname="Matt"
-                     th:attr="data-commentid=${reply.comment_id},data-commentnickname=${reply.comment_user_name}"
+                  <a class="reply" data-courseanswerid="1" data-courseanswernickname="Matt"
+                     th:attr="data-courseanswerid=${reply.course_answer_id},data-courseanswernickname=${reply.course_answer_user_name}"
                      onclick="reply(this)">回复</a>
                   <a class="delete" href="#"
-                     th:href="@{/comment/{param1}/{param2}/delete(param1=${reply.comment_course_id},param2=${reply.comment_id})}"
+                     th:href="@{/courseAnswer/{param1}/{param2}/delete(param1=${reply.course_id},param2=${reply.course_answer_id})}"
                      onclick="alert('确定要删除该评论吗？三思啊! 删了可就没了！')"
                      th:if="${session.user}">删除</a>
                   <!--<a class="delete" href="#" th:href="@{/comment/{id}/delete(id=${reply.id})}" onclick="return confirm('确定要删除该评论吗？三思啊! 删了可就没了！')" th:if="${session.user}">删除</a>-->
@@ -252,11 +258,11 @@
     </div>
   </div>
 
-  <div id="comment-form" class="ui form">
-    <input type="hidden" name="courseId" th:value="${course.course_id}">
-    <input type="hidden" name="parentComment.comment_id" value="-1">
+  <div id="courseanswer-form" class="ui form">
+    <input type="hidden" name="course_id" th:value="${course.course_id}">
+    <input type="hidden" name="parentCourseAnswer.course_answer_id" value="-1">
     <input type="hidden" name="name" th:value="${session.teacher}? ${session.teacher.teacher_name}: ${session.student.student_name}">
-    <input type="hidden" name="number" th:value="${session.teacher}? ${session.teacher.teacher_number}: ${session.student.student_number}">
+<!--    <input type="hidden" name="number" th:value="${session.teacher}? ${session.teacher.teacher_number}: ${session.student.student_number}">-->
     <div class="field">
       <div id="answer_editor" th:utext="*{answer_content}">
 
@@ -283,6 +289,11 @@
   </div>
 </div>
 
+<!--CDN版本,不需要下载-->
+<!--连接jsdeliver-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--链接semantic UI-->
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 
 <!-- 使用wangEditor富文档，注意，只需要引用 JS，无需引用任何 CSS ！！！-->
 <script type="text/javascript" src="../../static/js/wangEditor.min.js" th:src="@{/js/wangEditor.min.js}"></script>
@@ -292,7 +303,7 @@
   // 或者 var editor = new E( document.getElementById('editor') )
   answer_editor.create()
 
-  document.getElementById('btn').addEventListener('click', function () {
+  document.getElementById('commentpost-btn').addEventListener('click', function () {
     // 读取 html
     // alert(content_editor.txt.html())
     // alert(answer_editor.txt.html())
@@ -302,6 +313,50 @@
 
 
   }, false)
+</script>
+
+<script th:inline="javascript">
+  $(function () {
+    $("#comment-container").load(/*[[@{/courseAnswers/{course_id}(course_id=${course.course_id})}]]*/);
+  });
+
+  $('#commentpost-btn').click(function () {
+    var boo = $('.ui.form').form('validate form');
+    if (boo) {
+      console.log("表单校验成功");
+      postData();
+    } else {
+      console.log("表单校验失败");
+    }
+  })
+
+  function postData() {
+    $("#comment-container").load(/*[[@{/courseAnswers}]]*/"", {
+      "parentCourseAnswer.course_answer_id": $("[name='parentCourseAnswer.course_answer_id']").val(),
+      "course_id": $("[name='course_id']").val(),
+      "course_answer_user_name": $("[name='name']").val(),
+      "course_answer_content": $("[name='answer_content']").val()
+    }, function (responseTxt, statusTxt, xhr) {  //回调方法
+      $(window).scrollTo($('#goto'), 500);   //滚动
+      clearContent();
+    });
+  }
+
+  //提交之后调用来清除内容
+  function clearContent() {
+    $("[name='answer_content']").val('');
+    $("[name='parentCourseAnswer.course_answer_id']").val(-1);
+    $("[name='answer_content']").attr("placeholder", "请输入内容.....");
+  }
+
+  //注意，此处的commentid，对应的是data-commentid，并且属性名不能出现大写
+  function reply(obj) {
+    var commentId = $(obj).data('courseanswerid');
+    var commentNickname = $(obj).data('courseanswernickname');
+    $("[name='answer_content']").attr("placeholder", "@" + commentNickname).focus();
+    $("[name='parentCourseAnswer.course_answer_id']").val(commentId);  //赋值
+    $(window).scrollTo($('#courseanswer-form'), 500);   //滚动
+  }
 </script>
 
 </body>
